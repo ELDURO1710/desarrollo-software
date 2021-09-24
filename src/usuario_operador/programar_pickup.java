@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package usuario_operador;
-import usuario_operador.operador;
+import usuario_operador.menu_operador;
 
 /**
  *
