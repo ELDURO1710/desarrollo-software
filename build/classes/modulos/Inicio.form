@@ -199,7 +199,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel_TITULO">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Flash"/>
+                    <Property name="text" type="java.lang.String" value="Easy eCommerce"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel_LOGO">

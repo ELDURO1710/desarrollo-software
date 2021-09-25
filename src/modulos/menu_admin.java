@@ -27,12 +27,19 @@ public class menu_admin extends javax.swing.JFrame {
     }
 
     public void imagenes(){
-        ImageIcon imagenusuarios = new ImageIcon("src/imagenes/empleado.png");
+        ImageIcon imagenusuarios = new ImageIcon("src/imagenes/empleado.png");new ImageIcon("src/imagenes/cliente.png");
         Image usr = imagenusuarios.getImage();
         Image imgusr = usr.getScaledInstance(80,80, Image.SCALE_SMOOTH);
         ImageIcon imagen_usuario = new ImageIcon(imgusr);
         this.jLabel_GESTION_empleado.setIcon(imagen_usuario);
         this.jLabel_GESTION_empleado.setText("");
+        
+        ImageIcon imagencliente = new ImageIcon("src/imagenes/cliente.png");
+        Image cli = imagencliente.getImage();
+        Image imgcli = cli.getScaledInstance(80,80, Image.SCALE_SMOOTH);
+        ImageIcon imagen_Clientes = new ImageIcon(imgcli);
+        this.jLabel_Usuarios.setIcon(imagen_Clientes);
+        this.jLabel_Usuarios.setText("");
         
         ImageIcon imagensedes = new ImageIcon("src/imagenes/sedes.png");
         Image sede = imagensedes.getImage();
@@ -59,7 +66,7 @@ public class menu_admin extends javax.swing.JFrame {
         jLabel_GESTION_SEDES = new javax.swing.JLabel();
         jButton_GESTION_SEDES = new javax.swing.JButton();
         jButton_getsion_cliente = new javax.swing.JButton();
-        jLabel_Clientes = new javax.swing.JLabel();
+        jLabel_Usuarios = new javax.swing.JLabel();
         jButton_atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,15 +97,15 @@ public class menu_admin extends javax.swing.JFrame {
             }
         });
 
-        jButton_getsion_cliente.setText("Gestionar Clientes");
+        jButton_getsion_cliente.setText("Gestionar Empleados");
         jButton_getsion_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_getsion_clienteActionPerformed(evt);
             }
         });
 
-        jLabel_Clientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Clientes.setText("CLIENTES");
+        jLabel_Usuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Usuarios.setText("USUARIOS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,13 +113,13 @@ public class menu_admin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_GESTION_USUARIOS))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_GESTION_USUARIOS)
+                    .addComponent(jLabel_Usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_getsion_cliente)
-                    .addComponent(jLabel_Clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton_GESTION_SEDES)
@@ -129,7 +136,7 @@ public class menu_admin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_GESTION_SEDES)
-                    .addComponent(jLabel_Clientes))
+                    .addComponent(jLabel_Usuarios))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_GESTION_USUARIOS)
@@ -174,7 +181,7 @@ public class menu_admin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_atras)
                     .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,10 +262,10 @@ public class menu_admin extends javax.swing.JFrame {
     private javax.swing.JButton jButton_GESTION_USUARIOS;
     private javax.swing.JButton jButton_atras;
     private javax.swing.JButton jButton_getsion_cliente;
-    private javax.swing.JLabel jLabel_Clientes;
     private javax.swing.JLabel jLabel_GESTION_SEDES;
     private javax.swing.JLabel jLabel_GESTION_empleado;
     private javax.swing.JLabel jLabel_TITULO;
+    private javax.swing.JLabel jLabel_Usuarios;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_CONTENIDO;
     // End of variables declaration//GEN-END:variables
