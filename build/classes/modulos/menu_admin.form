@@ -92,7 +92,7 @@
                       </Group>
                       <EmptySpace pref="72" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton_getsion_cliente" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_getsion_empleado" linkSize="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel_GESTION_empleado" min="-2" pref="163" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="72" max="32767" attributes="0"/>
@@ -117,7 +117,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton_GESTION_USUARIOS" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_GESTION_SEDES" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton_getsion_cliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_getsion_empleado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
@@ -159,12 +159,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_GESTION_SEDESActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton_getsion_cliente">
+            <Component class="javax.swing.JButton" name="jButton_getsion_empleado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gestionar Empleados"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_getsion_clienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_getsion_empleadoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel_Usuarios">

@@ -65,7 +65,7 @@ public class menu_admin extends javax.swing.JFrame {
         jLabel_GESTION_empleado = new javax.swing.JLabel();
         jLabel_GESTION_SEDES = new javax.swing.JLabel();
         jButton_GESTION_SEDES = new javax.swing.JButton();
-        jButton_getsion_cliente = new javax.swing.JButton();
+        jButton_getsion_empleado = new javax.swing.JButton();
         jLabel_Usuarios = new javax.swing.JLabel();
         jButton_atras = new javax.swing.JButton();
 
@@ -97,10 +97,10 @@ public class menu_admin extends javax.swing.JFrame {
             }
         });
 
-        jButton_getsion_cliente.setText("Gestionar Empleados");
-        jButton_getsion_cliente.addActionListener(new java.awt.event.ActionListener() {
+        jButton_getsion_empleado.setText("Gestionar Empleados");
+        jButton_getsion_empleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_getsion_clienteActionPerformed(evt);
+                jButton_getsion_empleadoActionPerformed(evt);
             }
         });
 
@@ -118,7 +118,7 @@ public class menu_admin extends javax.swing.JFrame {
                     .addComponent(jLabel_Usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_getsion_cliente)
+                    .addComponent(jButton_getsion_empleado)
                     .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -127,7 +127,7 @@ public class menu_admin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_GESTION_SEDES, jButton_GESTION_USUARIOS, jButton_getsion_cliente});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_GESTION_SEDES, jButton_GESTION_USUARIOS, jButton_getsion_empleado});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +141,7 @@ public class menu_admin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_GESTION_USUARIOS)
                     .addComponent(jButton_GESTION_SEDES)
-                    .addComponent(jButton_getsion_cliente))
+                    .addComponent(jButton_getsion_empleado))
                 .addGap(18, 18, 18))
         );
 
@@ -218,9 +218,9 @@ public class menu_admin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton_atrasActionPerformed
 
-    private void jButton_getsion_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_getsion_clienteActionPerformed
+    private void jButton_getsion_empleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_getsion_empleadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_getsion_clienteActionPerformed
+    }//GEN-LAST:event_jButton_getsion_empleadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,7 +261,7 @@ public class menu_admin extends javax.swing.JFrame {
     private javax.swing.JButton jButton_GESTION_SEDES;
     private javax.swing.JButton jButton_GESTION_USUARIOS;
     private javax.swing.JButton jButton_atras;
-    private javax.swing.JButton jButton_getsion_cliente;
+    private javax.swing.JButton jButton_getsion_empleado;
     private javax.swing.JLabel jLabel_GESTION_SEDES;
     private javax.swing.JLabel jLabel_GESTION_empleado;
     private javax.swing.JLabel jLabel_TITULO;
