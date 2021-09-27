@@ -23,7 +23,6 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         imagenes();
-        //Uribe 70HPTA
     }
     
     public void imagenes(){
