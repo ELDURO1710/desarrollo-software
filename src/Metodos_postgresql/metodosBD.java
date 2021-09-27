@@ -51,12 +51,12 @@ public class metodosBD {
     }
     
     
-    public int buscar_persona(String ID, String contrasena) {
-        int resultado = 0;
+    public ResultSet buscar_persona(String ID, String contrasena) {
+        ResultSet resultado = null;
         int cargo=0;//cargo 0 es no encontrado, cargo 1 es cliente, cargo 2 es operador y cargo 3 es admin
         Connection conexion;
 
-        String sentencia_buscar = ("SELECT  e.id,e.id_cargo,e.contrasena FROM empleado e WHERE e.id LIKE (?) && e.contrasena like (?)");
+        String sentencia_buscar = ("SELECT  e.id,e.contrasena,e.id_cargo FROM empleado  e WHERE e.id LIKE (?) && e.contrasena like (?)");
 
         try {
             conexion = (Connection) ConexionBD.Conectar();
@@ -64,12 +64,13 @@ public class metodosBD {
             sentencia_preparada.setString(1, ID);
             sentencia_preparada.setString(2, contrasena);
 
-            resultado = sentencia_preparada.executeUpdate();
+            resultado = sentencia_preparada.executeQuery();
             sentencia_preparada.close();
             conexion.close();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        System.out.println(resultado.getRowId(0));
 
         return resultado;
     }
