@@ -27,7 +27,7 @@ public class login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         imagenes();
-        //Esto no sirve pa un culo
+        //Esto no sirve pa un culo....................
     }
     
     
