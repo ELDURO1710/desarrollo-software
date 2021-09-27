@@ -5,6 +5,7 @@
  */
 package modulos;
 
+import admin_gestion_cliente.gestion_de_cliente;
 import admin_gestion_operador.gestion_de_empleado;
 import admin_gestion_sedes.gestion_de_sedes;
 import java.awt.Dialog.ModalityType;
@@ -197,8 +198,8 @@ public class menu_admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_GESTION_USUARIOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_USUARIOSActionPerformed
-        gestion_de_empleado admin_usr;
-        admin_usr = new gestion_de_empleado();
+        gestion_de_cliente admin_usr;
+        admin_usr = new gestion_de_cliente();
         admin_usr.setAlwaysOnTop (true);
         admin_usr.setVisible(true);
         this.dispose();
@@ -220,6 +221,11 @@ public class menu_admin extends javax.swing.JFrame {
 
     private void jButton_getsion_empleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_getsion_empleadoActionPerformed
         // TODO add your handling code here:
+        gestion_de_empleado admin_usr;
+        admin_usr = new gestion_de_empleado();
+        admin_usr.setAlwaysOnTop (true);
+        admin_usr.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton_getsion_empleadoActionPerformed
 
     /**

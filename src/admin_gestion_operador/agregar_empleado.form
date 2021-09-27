@@ -83,7 +83,7 @@
         <Component class="javax.swing.JLabel" name="jLabel_TITULO">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Registrar Nuevo Usuario"/>
+            <Property name="text" type="java.lang.String" value="Registrar Nuevo Empleado"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel1">
@@ -106,7 +106,7 @@
                           <Component id="jLabel_direccion" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel_id" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel_nombre" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel_cargo" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                          <Component id="jLabel_rol" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -152,7 +152,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jComboBox_cargos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_cargo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_rol" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -208,10 +208,10 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_cargo">
+            <Component class="javax.swing.JLabel" name="jLabel_rol">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Cargo:"/>
+                <Property name="text" type="java.lang.String" value="Rol:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox_cargos">

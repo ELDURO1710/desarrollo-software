@@ -267,17 +267,25 @@ public class rastrear_paquete extends javax.swing.JDialog {
     private javax.swing.JLabel TITULO;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel_MENSAJE;
+    private javax.swing.JLabel jLabel_id1;
+    private javax.swing.JLabel jLabel_id2;
     private javax.swing.JLabel jLabel_mensaje;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_botones;
     private javax.swing.JPanel jPanel_credito;
     private javax.swing.JRadioButton jRadioButton_americanexpress;
     private javax.swing.JRadioButton jRadioButton_mastercard;
     private javax.swing.JRadioButton jRadioButton_visa;
     private javax.swing.JTextField jTextField20;
+    private javax.swing.JTextField jTextField_ID_remi;
+    private javax.swing.JTextField jTextField_ID_remi1;
     // End of variables declaration//GEN-END:variables
 }

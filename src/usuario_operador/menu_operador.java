@@ -26,14 +26,14 @@ public class menu_operador extends javax.swing.JFrame {
     
     public void imagenes(){
         
-        ImageIcon imagenlogo = new ImageIcon("src/imagenes/conductor.png");
+        ImageIcon imagenlogo = new ImageIcon("src/imagenes/empleado.png");
         Image logo = imagenlogo.getImage();
         Image imglogo = logo.getScaledInstance(80,80, Image.SCALE_SMOOTH);
         ImageIcon imagen_logo = new ImageIcon(imglogo);
         this.jLabel_logo.setIcon(imagen_logo);
         this.jLabel_logo.setText("");
         
-        ImageIcon imagenpickup = new ImageIcon("src/imagenes/pickup.png");
+        ImageIcon imagenpickup = new ImageIcon("src/imagenes/conductor.png");
         Image pickup = imagenpickup.getImage();
         Image imgpickup = pickup.getScaledInstance(80,80, Image.SCALE_SMOOTH);
         ImageIcon imagen_pickup = new ImageIcon(imgpickup);
@@ -97,7 +97,7 @@ public class menu_operador extends javax.swing.JFrame {
             }
         });
 
-        jButton_cobrar.setText("Pagar recibo");
+        jButton_cobrar.setText("Pagar Ticket");
         jButton_cobrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_cobrarActionPerformed(evt);

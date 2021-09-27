@@ -44,7 +44,7 @@ public class agregar_empleado extends javax.swing.JDialog {
         jTextField_telefono = new javax.swing.JTextField();
         jLabel_sueldo = new javax.swing.JLabel();
         jTextField_sueldo = new javax.swing.JTextField();
-        jLabel_cargo = new javax.swing.JLabel();
+        jLabel_rol = new javax.swing.JLabel();
         jComboBox_cargos = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jButton_atras = new javax.swing.JButton();
@@ -55,7 +55,7 @@ public class agregar_empleado extends javax.swing.JDialog {
         setResizable(false);
 
         jLabel_TITULO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_TITULO.setText("Registrar Nuevo Usuario");
+        jLabel_TITULO.setText("Registrar Nuevo Empleado");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
 
@@ -88,8 +88,8 @@ public class agregar_empleado extends javax.swing.JDialog {
 
         jTextField_sueldo.setToolTipText("");
 
-        jLabel_cargo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_cargo.setText("Cargo:");
+        jLabel_rol.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_rol.setText("Rol:");
 
         jComboBox_cargos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_cargos.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +110,7 @@ public class agregar_empleado extends javax.swing.JDialog {
                     .addComponent(jLabel_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_rol, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox_cargos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -147,7 +147,7 @@ public class agregar_empleado extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox_cargos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_cargo)))
+                    .addComponent(jLabel_rol)))
         );
 
         jButton_atras.setText("Atras");
@@ -314,12 +314,12 @@ public class agregar_empleado extends javax.swing.JDialog {
     private javax.swing.JButton jButton_registrar;
     private javax.swing.JComboBox<String> jComboBox_cargos;
     private javax.swing.JLabel jLabel_TITULO;
-    private javax.swing.JLabel jLabel_cargo;
     private javax.swing.JLabel jLabel_celular;
     private javax.swing.JLabel jLabel_direccion;
     private javax.swing.JLabel jLabel_id;
     private javax.swing.JLabel jLabel_mensaje;
     private javax.swing.JLabel jLabel_nombre;
+    private javax.swing.JLabel jLabel_rol;
     private javax.swing.JLabel jLabel_sueldo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
