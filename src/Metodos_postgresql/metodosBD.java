@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,6 +25,8 @@ public class metodosBD {
     public static String sql;
     public static int resultado_numero = 0;
 
+    
+    
     public int guardar_persona(String nombres, String apellido1, String apellido2, String celular, String direccion, String correo) {
         int resultado = 0;
         Connection conexion;
@@ -51,28 +54,56 @@ public class metodosBD {
     }
     
     
-    public ResultSet buscar_persona(String ID, String contrasena) {
+    public int buscar_persona(String contrasena, int user) {
         ResultSet resultado = null;
-        int cargo=0;//cargo 0 es no encontrado, cargo 1 es cliente, cargo 2 es operador y cargo 3 es admin
+        int resultadito =0;
         Connection conexion;
 
-        String sentencia_buscar = ("SELECT  e.id,e.contrasena,e.id_cargo FROM empleado  e WHERE e.id LIKE (?) && e.contrasena like (?)");
+        String sentencia_buscar = ("SELECT id_cargo FROM empleado WHERE contrasena=(?) AND id_persona=(?)");
 
         try {
             conexion = (Connection) ConexionBD.Conectar();
             sentencia_preparada = conexion.prepareStatement(sentencia_buscar);
-            sentencia_preparada.setString(1, ID);
-            sentencia_preparada.setString(2, contrasena);
-
+            sentencia_preparada.setString(1, contrasena);
+            sentencia_preparada.setInt(2, user);
             resultado = sentencia_preparada.executeQuery();
+            if(resultado.next());
+                resultadito=resultado.getInt(1);
             sentencia_preparada.close();
             conexion.close();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        System.out.println(resultado.getRowId(0));
-
-        return resultado;
+        return resultadito;
     }
+    
+    //Metodos de las sedes
+    
+    public int guardar_sede(String nombres, String direccion, String telefono) {
+            int resultado = 0;
+            Connection conexion;
 
+            String sentencia_guardar = ("INSERT INTO sedes (nombre, direccion, telefono) VALUES  (?,?,?)");
+
+            try {
+                conexion = (Connection) ConexionBD.Conectar();
+                sentencia_preparada = conexion.prepareStatement(sentencia_guardar);
+                sentencia_preparada.setString(1, nombres);
+                sentencia_preparada.setString(2, direccion);
+                sentencia_preparada.setString(3, telefono);
+
+                resultado = sentencia_preparada.executeUpdate();
+                sentencia_preparada.close();
+                conexion.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+
+            return resultado;
+        }
+    
+                
+    
+
+    
 }

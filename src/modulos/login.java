@@ -27,7 +27,6 @@ public class login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         imagenes();
-        
     }
     
     
@@ -54,9 +53,11 @@ public class login extends javax.swing.JFrame {
     
     public void ingresar(){
         String usuario = this.jTextField_ID.getText();
+        int user=Integer.valueOf(usuario);
         String pass = this.jTextField_contrasena.getText();
+        
         if(solonumeros(this.jTextField_ID.getText())){
-            switch (metodos.buscar_persona(usuario, pass)){
+            switch (metodos.buscar_persona(pass, user)){
                 case 0:
                     this.jLabel_mensaje.setText("Contraseña y/o usuario incorrectos");
                     break;
@@ -298,32 +299,8 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField_IDActionPerformed
 
     private void jButton_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ingresarActionPerformed
-        //ingresar(); //esta funcion se activara cuando resolvamos el login, mientras, ingrese 1 para cliente, 2 para operador y 3 para admin
-        System.out.println(this.jTextField_ID.getText());
-        if(this.jTextField_ID.getText() == ""){
-            menu_cliente cliente;
-            cliente = new menu_cliente();
-            cliente.setVisible(true);
-            this.dispose();
-        }
-        if(Integer.parseInt(this.jTextField_ID.getText()) == 1){
-            menu_cliente cliente;
-            cliente = new menu_cliente();
-            cliente.setVisible(true);
-            this.dispose();
-        }
-        if(Integer.parseInt(this.jTextField_ID.getText()) == 2){
-            menu_operador empleado;
-            empleado = new menu_operador();
-            empleado.setVisible(true);
-            this.dispose();
-        }
-        if(Integer.parseInt(this.jTextField_ID.getText()) == 3){
-            menu_admin admin;
-            admin = new menu_admin();
-            admin.setVisible(true);
-            this.dispose();
-        }
+        ingresar(); //esta funcion se activara cuando resolvamos el login, mientras, ingrese 1 para cliente, 2 para operador y 3 para admin
+
     }//GEN-LAST:event_jButton_ingresarActionPerformed
 
     private void jButton_ingresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton_ingresarKeyPressed

@@ -5,6 +5,8 @@
  */
 package admin_gestion_sedes;
 
+import Metodos_postgresql.metodosBD;
+
 /**
  *
  * @author juandiazvillota
@@ -20,6 +22,14 @@ public class agregar_sede extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
     }
 
+    
+    metodosBD metodos = new metodosBD();
+    
+    public void registrar(){
+        metodos.guardar_sede(this.jTextField_NOMBRE.getText(), this.jTextField_direccion.getText(), this.jTextField_telefono.getText());
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,7 +56,7 @@ public class agregar_sede extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jButton_atras = new javax.swing.JButton();
         jButton_registrar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelm = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,8 +77,20 @@ public class agregar_sede extends javax.swing.JDialog {
         jLabel_direccion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_direccion.setText("Direccion:");
 
+        jTextField_direccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_direccionActionPerformed(evt);
+            }
+        });
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Telefono");
+
+        jTextField_telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_telefonoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Horario:");
@@ -144,9 +166,14 @@ public class agregar_sede extends javax.swing.JDialog {
         });
 
         jButton_registrar.setText("Registrar");
+        jButton_registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_registrarActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("DEVUELVE EL ID DE LA SEDE");
+        jLabelm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelm.setText("DEVUELVE EL ID DE LA SEDE");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -158,7 +185,7 @@ public class agregar_sede extends javax.swing.JDialog {
                 .addGap(90, 90, 90)
                 .addComponent(jButton_registrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_atras, jButton_registrar});
@@ -170,8 +197,8 @@ public class agregar_sede extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_atras)
                     .addComponent(jButton_registrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabelm, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -231,6 +258,19 @@ public class agregar_sede extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton_atrasActionPerformed
 
+    private void jTextField_direccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_direccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_direccionActionPerformed
+
+    private void jTextField_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_telefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_telefonoActionPerformed
+
+    private void jButton_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registrarActionPerformed
+        //this.registrar();
+        
+    }//GEN-LAST:event_jButton_registrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -280,12 +320,12 @@ public class agregar_sede extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox_cargis;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_TITULO;
     private javax.swing.JLabel jLabel_direccion;
     private javax.swing.JLabel jLabel_nombre;
+    private javax.swing.JLabel jLabelm;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_CONTENIDO;
