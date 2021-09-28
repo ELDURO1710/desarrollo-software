@@ -268,7 +268,7 @@ public class menu_admin extends javax.swing.JFrame {
         admin_dash = new Dashboard();
         admin_dash.setAlwaysOnTop(true);
         admin_dash.setVisible(true);
-        this.dispose();
+        this.dispose(); 
     }//GEN-LAST:event_btnDashboardActionPerformed
 
     /**
