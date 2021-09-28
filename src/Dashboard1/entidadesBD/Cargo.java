@@ -1,9 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Dashboard1.EntidadesBD;
+package Dashboard1.entidadesBD;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -18,7 +17,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author DANILO
+ * @author ASUS
  */
 @Entity
 @Table(name = "cargo")
@@ -93,7 +92,7 @@ public class Cargo implements Serializable {
 
     @Override
     public String toString() {
-        return "Dashboard1.EntidadesBD.Cargo[ id=" + id + " ]";
+        return "Dashboard1.entidadesBD.Cargo[ id=" + id + " ]";
     }
     
 }
