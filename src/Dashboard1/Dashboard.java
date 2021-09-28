@@ -14,6 +14,7 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
+    // Prueba final
     public Dashboard() {
         initComponents();
         this.setLocationRelativeTo(null);
