@@ -61,8 +61,9 @@ public class menu_admin extends javax.swing.JFrame {
         jButton_GESTION_SEDES = new javax.swing.JButton();
         jButton_getsion_cliente = new javax.swing.JButton();
         jLabel_Clientes = new javax.swing.JLabel();
-        jLabel_GESTION_SEDES1 = new javax.swing.JLabel();
         btnDashboard = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel_GESTION_SEDES1 = new javax.swing.JLabel();
         jButton_atras = new javax.swing.JButton();
         jButton_GESTION_SEDES1 = new javax.swing.JButton();
 
@@ -102,10 +103,7 @@ public class menu_admin extends javax.swing.JFrame {
         });
 
         jLabel_Clientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Clientes.setText("CLIENTES");
-
-        jLabel_GESTION_SEDES1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_GESTION_SEDES1.setText("DASHBOARD");
+        jLabel_Clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_team_60px.png"))); // NOI18N
 
         btnDashboard.setText("Consultar Dasboard");
         btnDashboard.setToolTipText("");
@@ -114,6 +112,10 @@ public class menu_admin extends javax.swing.JFrame {
                 btnDashboardActionPerformed(evt);
             }
         });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_combo_chart_48px.png"))); // NOI18N
+
+        jLabel_GESTION_SEDES1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,13 +136,19 @@ public class menu_admin extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jButton_GESTION_SEDES)))
-                .addGap(90, 90, 90)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_GESTION_SEDES1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnDashboard)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(100, 100, 100)
+                        .addComponent(btnDashboard)
+                        .addContainerGap(46, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(78, 78, 78))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_GESTION_SEDES1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_GESTION_SEDES, jButton_GESTION_USUARIOS, jButton_getsion_cliente});
@@ -148,12 +156,14 @@ public class menu_admin extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_GESTION_SEDES1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_GESTION_SEDES)
                     .addComponent(jLabel_Clientes)
-                    .addComponent(jLabel_GESTION_SEDES1))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_GESTION_USUARIOS)
@@ -167,17 +177,17 @@ public class menu_admin extends javax.swing.JFrame {
         jPanel_CONTENIDO.setLayout(jPanel_CONTENIDOLayout);
         jPanel_CONTENIDOLayout.setHorizontalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_TITULO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(48, 48, 48))
+            .addComponent(jLabel_TITULO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel_CONTENIDOLayout.setVerticalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel_TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -221,12 +231,12 @@ public class menu_admin extends javax.swing.JFrame {
                 .addComponent(jButton_atras)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(139, 139, 139)
                     .addComponent(jButton_GESTION_SEDES1)
-                    .addContainerGap(139, Short.MAX_VALUE)))
+                    .addContainerGap(199, Short.MAX_VALUE)))
         );
 
         pack();
@@ -313,6 +323,7 @@ public class menu_admin extends javax.swing.JFrame {
     private javax.swing.JButton jButton_GESTION_USUARIOS;
     private javax.swing.JButton jButton_atras;
     private javax.swing.JButton jButton_getsion_cliente;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Clientes;
     private javax.swing.JLabel jLabel_GESTION_SEDES;
     private javax.swing.JLabel jLabel_GESTION_SEDES1;
