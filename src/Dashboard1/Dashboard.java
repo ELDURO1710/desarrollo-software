@@ -9,7 +9,7 @@ package Dashboard1;
  *
  * @author DANILO
  */
-public class Dashboard extends javax.swing.JFrame {
+public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
 
     /**
      * Creates new form Dashboard
