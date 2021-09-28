@@ -7,6 +7,7 @@ package cliente;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import modulos.Inicio;
 
 /**
  *
@@ -234,6 +235,7 @@ public class menu_cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_rastreoActionPerformed
 
     private void jButton_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atrasActionPerformed
+        
         Inicio log = new Inicio();
         log.setVisible(true);
         this.dispose();
