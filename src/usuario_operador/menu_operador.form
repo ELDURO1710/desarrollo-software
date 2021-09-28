@@ -61,7 +61,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="jLabel_pickuo" alignment="2" min="-2" pref="83" max="-2" attributes="0"/>
@@ -140,7 +140,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton_cobrar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pagar Ticket"/>
+            <Property name="text" type="java.lang.String" value="Pagar recibo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_cobrarActionPerformed"/>

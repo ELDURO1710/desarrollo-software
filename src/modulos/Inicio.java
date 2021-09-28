@@ -114,7 +114,7 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         jLabel_TITULO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_TITULO.setText("Easy eCommerce");
+        jLabel_TITULO.setText("Flash");
 
         jLabel_LOGO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_LOGO.setText("logo");

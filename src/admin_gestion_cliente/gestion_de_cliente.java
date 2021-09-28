@@ -39,7 +39,7 @@ public final class gestion_de_cliente extends javax.swing.JFrame {
         this.jLabel_add.setIcon(imagen_add);
         this.jLabel_add.setText("");
         
-        ImageIcon imagenlogo = new ImageIcon("src/imagenes/cliente.png");
+        ImageIcon imagenlogo = new ImageIcon("src/imagenes/empleado.png");
         Image logo = imagenlogo.getImage();
         Image imglogo = logo.getScaledInstance(80,80, Image.SCALE_SMOOTH);
         ImageIcon imagen_logo = new ImageIcon(imglogo);

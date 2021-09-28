@@ -9,7 +9,7 @@ package Dashboard1;
  *
  * @author DANILO
  */
-public class Dashboard extends javax.swing.JFrame { //APLICACIÓN ANTIGUA EN LA RAMA DASHBOARD
+public class Dashboard extends javax.swing.JFrame {
 
     /**
      * Creates new form Dashboard

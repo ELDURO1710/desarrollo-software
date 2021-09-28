@@ -102,7 +102,7 @@ public final class gestion_de_empleado extends javax.swing.JFrame {
         jLabel_add.setMaximumSize(new java.awt.Dimension(16, 16));
         jLabel_add.setMinimumSize(new java.awt.Dimension(16, 16));
 
-        jButton_delete.setText("Borrar Empleados");
+        jButton_delete.setText("Borrar Usuario");
         jButton_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_deleteActionPerformed(evt);
@@ -112,14 +112,14 @@ public final class gestion_de_empleado extends javax.swing.JFrame {
         jLabel_buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_buscar.setText("SEARCH");
 
-        jButton_uodate.setText("Actualizar Empleados");
+        jButton_uodate.setText("Actualizar Usuario");
         jButton_uodate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_uodateActionPerformed(evt);
             }
         });
 
-        jButton_search.setText("Consultar Empleados");
+        jButton_search.setText("Consultar Usuarios");
         jButton_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_searchActionPerformed(evt);
@@ -129,7 +129,7 @@ public final class gestion_de_empleado extends javax.swing.JFrame {
         jLabel_actualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_actualizar.setText("UPDATE");
 
-        jButton_add.setText("Agregar Empleados");
+        jButton_add.setText("Agregar Usuario");
         jButton_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_addActionPerformed(evt);
@@ -208,7 +208,7 @@ public final class gestion_de_empleado extends javax.swing.JFrame {
         jLabel_logo.setText("logito");
 
         jLabel_TITULO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_TITULO.setText("Gestion de Empleados");
+        jLabel_TITULO.setText("Gestion de Usuarios");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

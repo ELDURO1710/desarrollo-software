@@ -58,10 +58,9 @@ public class registro extends javax.swing.JDialog {
                 (sololetras(this.jTextField_apellido1.getText())) && (sololetras(this.jTextField_apellido2.getText())) 
                 && (solonumeros(this.jTextField_telefono.getText())) && (solonumeros(this.jTextField_cedula.getText())))
             {
-                int resultadito = metodos.guardar_persona(this.jTextField_NOMBRE1.getText(), this.jTextField_apellido1.getText(), 
+                metodos.guardar_persona(this.jTextField_NOMBRE1.getText(), this.jTextField_apellido1.getText(), 
                 this.jTextField_apellido2.getText(), this.jTextField_telefono.getText(), this.jTextField_direccion1.getText(), 
                 this.jTextField_correo.getText());
-                System.out.println(resultadito);
                 this.jLabel_mensaje.setText("Registrado con exito.");
             }
             else{

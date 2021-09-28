@@ -45,7 +45,7 @@ public class consultar_empleado extends javax.swing.JDialog {
         setResizable(false);
 
         jLabel_TITULO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_TITULO.setText("Consultar Empleados");
+        jLabel_TITULO.setText("Consultar Usuario");
 
         jButton_atras.setText("Atras");
         jButton_atras.addActionListener(new java.awt.event.ActionListener() {

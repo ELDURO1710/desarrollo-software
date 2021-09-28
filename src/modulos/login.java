@@ -27,7 +27,6 @@ public class login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         imagenes();
-        
     }
     
     

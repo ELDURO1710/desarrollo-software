@@ -5,7 +5,7 @@
  */
 package modulos;
 
-import admin_gestion_cliente.gestion_de_cliente;
+import Dashboard1.Dashboard;
 import admin_gestion_operador.gestion_de_empleado;
 import admin_gestion_sedes.gestion_de_sedes;
 import java.awt.Dialog.ModalityType;
@@ -28,19 +28,12 @@ public class menu_admin extends javax.swing.JFrame {
     }
 
     public void imagenes(){
-        ImageIcon imagenusuarios = new ImageIcon("src/imagenes/empleado.png");new ImageIcon("src/imagenes/cliente.png");
+        ImageIcon imagenusuarios = new ImageIcon("src/imagenes/empleado.png");
         Image usr = imagenusuarios.getImage();
         Image imgusr = usr.getScaledInstance(80,80, Image.SCALE_SMOOTH);
         ImageIcon imagen_usuario = new ImageIcon(imgusr);
         this.jLabel_GESTION_empleado.setIcon(imagen_usuario);
         this.jLabel_GESTION_empleado.setText("");
-        
-        ImageIcon imagencliente = new ImageIcon("src/imagenes/cliente.png");
-        Image cli = imagencliente.getImage();
-        Image imgcli = cli.getScaledInstance(80,80, Image.SCALE_SMOOTH);
-        ImageIcon imagen_Clientes = new ImageIcon(imgcli);
-        this.jLabel_Usuarios.setIcon(imagen_Clientes);
-        this.jLabel_Usuarios.setText("");
         
         ImageIcon imagensedes = new ImageIcon("src/imagenes/sedes.png");
         Image sede = imagensedes.getImage();
@@ -66,9 +59,12 @@ public class menu_admin extends javax.swing.JFrame {
         jLabel_GESTION_empleado = new javax.swing.JLabel();
         jLabel_GESTION_SEDES = new javax.swing.JLabel();
         jButton_GESTION_SEDES = new javax.swing.JButton();
-        jButton_getsion_empleado = new javax.swing.JButton();
-        jLabel_Usuarios = new javax.swing.JLabel();
+        jButton_getsion_cliente = new javax.swing.JButton();
+        jLabel_Clientes = new javax.swing.JLabel();
+        jLabel_GESTION_SEDES1 = new javax.swing.JLabel();
+        btnDashboard = new javax.swing.JButton();
         jButton_atras = new javax.swing.JButton();
+        jButton_GESTION_SEDES1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -98,15 +94,26 @@ public class menu_admin extends javax.swing.JFrame {
             }
         });
 
-        jButton_getsion_empleado.setText("Gestionar Empleados");
-        jButton_getsion_empleado.addActionListener(new java.awt.event.ActionListener() {
+        jButton_getsion_cliente.setText("Gestionar Clientes");
+        jButton_getsion_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_getsion_empleadoActionPerformed(evt);
+                jButton_getsion_clienteActionPerformed(evt);
             }
         });
 
-        jLabel_Usuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Usuarios.setText("USUARIOS");
+        jLabel_Clientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Clientes.setText("CLIENTES");
+
+        jLabel_GESTION_SEDES1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_GESTION_SEDES1.setText("DASHBOARD");
+
+        btnDashboard.setText("Consultar Dasboard");
+        btnDashboard.setToolTipText("");
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboardActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,35 +121,45 @@ public class menu_admin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_GESTION_USUARIOS)
-                    .addComponent(jLabel_Usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_getsion_empleado)
-                    .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton_GESTION_SEDES)
-                    .addComponent(jLabel_GESTION_SEDES, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_GESTION_USUARIOS))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_getsion_cliente)
+                    .addComponent(jLabel_Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_GESTION_SEDES, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton_GESTION_SEDES)))
+                .addGap(90, 90, 90)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_GESTION_SEDES1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnDashboard)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_GESTION_SEDES, jButton_GESTION_USUARIOS, jButton_getsion_empleado});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_GESTION_SEDES, jButton_GESTION_USUARIOS, jButton_getsion_cliente});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_GESTION_SEDES)
-                    .addComponent(jLabel_Usuarios))
+                    .addComponent(jLabel_Clientes)
+                    .addComponent(jLabel_GESTION_SEDES1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_GESTION_USUARIOS)
                     .addComponent(jButton_GESTION_SEDES)
-                    .addComponent(jButton_getsion_empleado))
+                    .addComponent(jButton_getsion_cliente)
+                    .addComponent(btnDashboard))
                 .addGap(18, 18, 18))
         );
 
@@ -151,10 +168,9 @@ public class menu_admin extends javax.swing.JFrame {
         jPanel_CONTENIDOLayout.setHorizontalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel_TITULO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CONTENIDOLayout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+            .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_CONTENIDOLayout.setVerticalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,13 +179,20 @@ public class menu_admin extends javax.swing.JFrame {
                 .addComponent(jLabel_TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton_atras.setText("Cerrar Sesion");
         jButton_atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_atrasActionPerformed(evt);
+            }
+        });
+
+        jButton_GESTION_SEDES1.setText("Gestionar Sedes");
+        jButton_GESTION_SEDES1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GESTION_SEDES1ActionPerformed(evt);
             }
         });
 
@@ -180,9 +203,16 @@ public class menu_admin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_atras)
-                    .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton_atras)
+                        .addGap(0, 768, Short.MAX_VALUE))
+                    .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(374, 374, 374)
+                    .addComponent(jButton_GESTION_SEDES1)
+                    .addContainerGap(400, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,15 +221,20 @@ public class menu_admin extends javax.swing.JFrame {
                 .addComponent(jButton_atras)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(139, 139, 139)
+                    .addComponent(jButton_GESTION_SEDES1)
+                    .addContainerGap(139, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_GESTION_USUARIOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_USUARIOSActionPerformed
-        gestion_de_cliente admin_usr;
-        admin_usr = new gestion_de_cliente();
+        gestion_de_empleado admin_usr;
+        admin_usr = new gestion_de_empleado();
         admin_usr.setAlwaysOnTop (true);
         admin_usr.setVisible(true);
         this.dispose();
@@ -219,14 +254,22 @@ public class menu_admin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton_atrasActionPerformed
 
-    private void jButton_getsion_empleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_getsion_empleadoActionPerformed
+    private void jButton_getsion_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_getsion_clienteActionPerformed
         // TODO add your handling code here:
-        gestion_de_empleado admin_usr;
-        admin_usr = new gestion_de_empleado();
-        admin_usr.setAlwaysOnTop (true);
-        admin_usr.setVisible(true);
+    }//GEN-LAST:event_jButton_getsion_clienteActionPerformed
+
+    private void jButton_GESTION_SEDES1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_SEDES1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_GESTION_SEDES1ActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
+        
+        Dashboard admin_dash;
+        admin_dash = new Dashboard();
+        admin_dash.setAlwaysOnTop(true);
+        admin_dash.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton_getsion_empleadoActionPerformed
+    }//GEN-LAST:event_btnDashboardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,14 +307,17 @@ public class menu_admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDashboard;
     private javax.swing.JButton jButton_GESTION_SEDES;
+    private javax.swing.JButton jButton_GESTION_SEDES1;
     private javax.swing.JButton jButton_GESTION_USUARIOS;
     private javax.swing.JButton jButton_atras;
-    private javax.swing.JButton jButton_getsion_empleado;
+    private javax.swing.JButton jButton_getsion_cliente;
+    private javax.swing.JLabel jLabel_Clientes;
     private javax.swing.JLabel jLabel_GESTION_SEDES;
+    private javax.swing.JLabel jLabel_GESTION_SEDES1;
     private javax.swing.JLabel jLabel_GESTION_empleado;
     private javax.swing.JLabel jLabel_TITULO;
-    private javax.swing.JLabel jLabel_Usuarios;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_CONTENIDO;
     // End of variables declaration//GEN-END:variables
