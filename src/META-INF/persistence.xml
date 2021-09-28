@@ -7,11 +7,6 @@
     <class>Dashboard1.EntidadesBD.Paquete</class>
     <class>Dashboard1.EntidadesBD.Cliente</class>
     <class>Dashboard1.EntidadesBD.Cargo</class>
-    <class>Dashboard1.entidadesBD.Persona</class>
-    <class>Dashboard1.entidadesBD.Sedes</class>
-    <class>Dashboard1.entidadesBD.Cargo</class>
-    <class>Dashboard1.entidadesBD.Paquete</class>
-    <class>Dashboard1.entidadesBD.Cliente</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-54-81-126-150.compute-1.amazonaws.com:5432/d5fr3fkrn09ap7"/>
       <property name="javax.persistence.jdbc.user" value="vrtxjhjlluxkxn"/>

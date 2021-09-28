@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Dashboard1;
+
 /**
  *
  * @author DANILO
@@ -12,10 +12,8 @@ package Dashboard1;
 public class Dashboard extends javax.swing.JFrame {
 
     /**
-     * Creates new form Dashboard 
+     * Creates new form Dashboard
      */
-    
-    //ESTO ES DE LA RAMA DASHBOARD
     public Dashboard() {
         initComponents();
         this.setLocationRelativeTo(null);
