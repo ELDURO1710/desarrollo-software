@@ -5,6 +5,8 @@
  */
 package Dashboard1;
 
+import modulos.menu_admin;
+
 /**
  *
  * @author DANILO
@@ -70,7 +72,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        btnSalirDash = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -451,12 +453,18 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dashboard1/Img/icons8_power_off_button_32px.png"))); // NOI18N
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, -1, 40));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, -1, 40));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("SALIR");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
+        btnSalirDash.setBackground(new java.awt.Color(0, 102, 102));
+        btnSalirDash.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        btnSalirDash.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalirDash.setText("Salir");
+        btnSalirDash.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirDashActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSalirDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 5, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -475,6 +483,13 @@ public class Dashboard extends javax.swing.JFrame {
     private void comboTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTablesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboTablesActionPerformed
+
+    private void btnSalirDashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirDashActionPerformed
+        // TODO add your handling code here:
+        menu_admin menu = new menu_admin();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirDashActionPerformed
 
     /**
      * @param args the command line arguments
@@ -513,6 +528,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table_Estados;
+    private javax.swing.JButton btnSalirDash;
     private javax.swing.JComboBox<String> comboTables;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -520,7 +536,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
