@@ -109,27 +109,29 @@ public class metodosBD {
     
     //Metodos de las sedes
     
-    public int guardar_sede(String nombres, String direccion, String telefono) {
-            int resultado = 0;
+    public int guardar_sede(String ID, String nombres, String direccion, String telefono) {
+            ResultSet resultado = null;
+            int resultadito=0;
             Connection conexion;
 
-            String sentencia_guardar = ("INSERT INTO sedes (nombre, direccion, telefono) VALUES  (?,?,?)");
+            String sentencia_guardar = ("INSERT INTO sedes (id,nombre, direccion, telefono) VALUES  (?,?,?,?)");
 
             try {
                 conexion = (Connection) ConexionBD.Conectar();
                 sentencia_preparada = conexion.prepareStatement(sentencia_guardar);
-                sentencia_preparada.setString(1, nombres);
-                sentencia_preparada.setString(2, direccion);
-                sentencia_preparada.setString(3, telefono);
+                sentencia_preparada.setInt(1, Integer.parseInt(ID));
+                sentencia_preparada.setString(2, nombres);
+                sentencia_preparada.setString(3, direccion);
+                sentencia_preparada.setString(4, telefono);
 
-                resultado = sentencia_preparada.executeUpdate();
+                resultado = sentencia_preparada.executeQuery();
                 sentencia_preparada.close();
                 conexion.close();
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
 
-            return resultado;
+            return resultadito;
         }
     
                 
