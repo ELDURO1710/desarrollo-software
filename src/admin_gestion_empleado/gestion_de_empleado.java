@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package admin_gestion_operador;
+package admin_gestion_empleado;
 
 
 import java.awt.Dialog.ModalityType;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import admin_gestion_operador.actualizar_empleado;
-import admin_gestion_operador.agregar_empleado;
-import admin_gestion_operador.borrar_empleado;
-import admin_gestion_operador.consultar_empleado;
+import admin_gestion_empleado.actualizar_empleado;
+import admin_gestion_empleado.agregar_empleado;
+import admin_gestion_empleado.borrar_empleado;
+import admin_gestion_empleado.consultar_empleado;
 import modulos.menu_admin;
 
 /**

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package admin_gestion_operador;
+package admin_gestion_empleado;
 
 import Metodos_postgresql.metodosBD;
 import javax.swing.JOptionPane;

@@ -6,7 +6,7 @@
 package modulos;
 
 import admin_gestion_cliente.gestion_de_cliente;
-import admin_gestion_operador.gestion_de_empleado;
+import admin_gestion_empleado.gestion_de_empleado;
 import admin_gestion_sedes.gestion_de_sedes;
 import java.awt.Dialog.ModalityType;
 import java.awt.Image;

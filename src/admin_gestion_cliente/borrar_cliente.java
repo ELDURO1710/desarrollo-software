@@ -5,7 +5,6 @@
  */
 package admin_gestion_cliente;
 
-import admin_gestion_operador.*;
 import modulos.*;
 
 /**

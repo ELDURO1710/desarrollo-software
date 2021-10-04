@@ -253,7 +253,6 @@ public class agregar_sede extends javax.swing.JDialog {
 
     private void jButton_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registrarActionPerformed
         this.registrar_sede();
-        
     }//GEN-LAST:event_jButton_registrarActionPerformed
 
     /**

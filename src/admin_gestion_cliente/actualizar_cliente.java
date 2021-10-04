@@ -6,7 +6,6 @@
 package admin_gestion_cliente;
 
 import Metodos_postgresql.metodosBD;
-import admin_gestion_operador.*;
 import modulos.*;
 
 /**
