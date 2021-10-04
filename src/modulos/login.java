@@ -57,7 +57,7 @@ public class login extends javax.swing.JFrame {
         String pass = this.jTextField_contrasena.getText();
         
         if(solonumeros(this.jTextField_ID.getText())){
-            switch (metodos.buscar_persona(pass, user)){
+            switch (metodos.buscar_personal(pass, user)){
                 case 0:
                     this.jLabel_mensaje.setText("Contraseña y/o usuario incorrectos");
                     break;

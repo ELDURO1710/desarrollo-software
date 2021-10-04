@@ -75,7 +75,7 @@ public class programar_pickup extends javax.swing.JDialog {
         jLabel_cantidad = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jButton_atras = new javax.swing.JButton();
-        jButton_generar_recibo = new javax.swing.JButton();
+        jButton_generar_factura = new javax.swing.JButton();
         jLabel_mensaje = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -103,7 +103,7 @@ public class programar_pickup extends javax.swing.JDialog {
         });
 
         jLabel_id1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_id1.setText("ID:");
+        jLabel_id1.setText("Cedula:");
 
         jTextField_ID_remi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,13 +118,13 @@ public class programar_pickup extends javax.swing.JDialog {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addComponent(jLabel_id1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField_ID_remi, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                .addComponent(jTextField_ID_remi, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +202,7 @@ public class programar_pickup extends javax.swing.JDialog {
         });
 
         jLabel_id.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_id.setText("ID:");
+        jLabel_id.setText("Cedula:");
 
         jTextField_ID_desti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,10 +404,10 @@ public class programar_pickup extends javax.swing.JDialog {
             }
         });
 
-        jButton_generar_recibo.setText("Generar Ticket");
-        jButton_generar_recibo.addActionListener(new java.awt.event.ActionListener() {
+        jButton_generar_factura.setText("Generar Factura");
+        jButton_generar_factura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_generar_reciboActionPerformed(evt);
+                jButton_generar_facturaActionPerformed(evt);
             }
         });
 
@@ -424,13 +424,13 @@ public class programar_pickup extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton_atras)
                         .addGap(114, 114, 114)
-                        .addComponent(jButton_generar_recibo)
+                        .addComponent(jButton_generar_factura)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
+                    .addComponent(jLabel_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_atras, jButton_generar_recibo});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_atras, jButton_generar_factura});
 
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +438,7 @@ public class programar_pickup extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_atras)
-                    .addComponent(jButton_generar_recibo))
+                    .addComponent(jButton_generar_factura))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -483,9 +483,10 @@ public class programar_pickup extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_generar_reciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_generar_reciboActionPerformed
+    private void jButton_generar_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_generar_facturaActionPerformed
+        //this.generar_factura();
         this.jLabel_mensaje.setText("ESTE MENSAJE PUEDE DEVOLVER EL ID DEL PAQUETE PARA SEGUIMIENTO");
-    }//GEN-LAST:event_jButton_generar_reciboActionPerformed
+    }//GEN-LAST:event_jButton_generar_facturaActionPerformed
 
     private void jButton_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atrasActionPerformed
         this.dispose();
@@ -574,13 +575,9 @@ public class programar_pickup extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton_atras;
-    private javax.swing.JButton jButton_generar_recibo;
+    private javax.swing.JButton jButton_generar_factura;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -588,10 +585,6 @@ public class programar_pickup extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_cantidad;
     private javax.swing.JLabel jLabel_descripcion;
     private javax.swing.JLabel jLabel_dimensiones;
@@ -602,9 +595,7 @@ public class programar_pickup extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel_peso;
     private javax.swing.JLabel jLabel_valor_declarado;
     private javax.swing.JLabel jLabelnombre_remi;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -613,10 +604,6 @@ public class programar_pickup extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButton_seguro;
     private javax.swing.JSpinner jSpinner_cantidad;
     private javax.swing.JSpinner jSpinner_pesokg;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField_ID_desti;
     private javax.swing.JTextField jTextField_ID_remi;

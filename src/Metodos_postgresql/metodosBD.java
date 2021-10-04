@@ -83,8 +83,31 @@ public class metodosBD {
         return resultadito;
     }
     
+    public String buscar_persona(String cedula){
+        ResultSet resultado = null;
+        String resultadito="";
+        Connection conexion;
+
+        String sentencia_buscar = ("SELECT * FROM persona WHERE id=(?)");
+
+        try {
+            conexion = (Connection) ConexionBD.Conectar();
+            sentencia_preparada = conexion.prepareStatement(sentencia_buscar);
+            sentencia_preparada.setInt(1, Integer.parseInt(cedula));
+            resultado = sentencia_preparada.executeQuery();
+            if(resultado.next());
+                resultadito= "empleado de cedula "+resultado.getString(1);
+                
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return resultadito;
+    }
     
-    public int buscar_persona(String contrasena, int user) {
+    
+    public int buscar_personal(String contrasena, int user) {
         ResultSet resultado = null;
         int resultadito =0;
         Connection conexion;
