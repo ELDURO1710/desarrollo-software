@@ -6,6 +6,12 @@
 package admin_gestion_operador;
 
 import modulos.*;
+import Metodos_postgresql.*;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +28,55 @@ public class agregar_empleado extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
     }
 
+    metodosBD metodos = new metodosBD();
+
+    public boolean solonumeros(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException x) {
+            return false;
+        }
+    }
+
+    public boolean sololetras(String cadena) {
+        for (int x = 0; x < cadena.length(); x++) {
+            char c = cadena.charAt(x);
+            // Si no está entre a y z, ni entre A y Z, ni es un espacio
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                this.jLabel_mensaje.setText("Evite usar un numero como nombre");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean escorreo(String cadena) {
+        boolean resul = (cadena.endsWith(".com") && cadena.contains("@"));
+        this.jLabel_mensaje.setText("Direccion de correo invalida");
+        return resul;
+    }
+
+    public void registrar() {
+        String nombres = this.jTextField_NOMBRES.getText();
+        String apellido1 = this.jTextField_apellido1.getText();
+        String apellido2 = this.jTextField_apellido2.getText();
+        String cedula = this.jTextField_cedula.getText();
+        String celular = this.jTextField_telefono.getText();
+        String direccion = this.jTextField_direccion.getText();
+        String correo = this.jTextField_email.getText();
+        String cargo = this.jTextField_cargo.getText();
+        String sede = this.jTextField_Sede.getText();
+        String contrasena = this.jTextField_password.getText();
+        String IDCORP = this.jTextField_ID_Corp.getText();
+
+        if (this.escorreo(correo) && this.sololetras(nombres) && this.sololetras(apellido1) && this.sololetras(apellido2) && this.solonumeros(celular) && this.solonumeros(cedula) && this.solonumeros(cargo) && this.solonumeros(sede) && this.solonumeros(IDCORP)) {
+
+            metodos.agregar_empleado(cedula, nombres, celular, direccion, apellido1, apellido2, correo, sede, cargo, contrasena, IDCORP, "1");
+            this.jLabel_mensaje.setText("REGISTRADO CON EXITO");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,17 +90,27 @@ public class agregar_empleado extends javax.swing.JDialog {
         jLabel_TITULO = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel_nombre = new javax.swing.JLabel();
-        jTextField_NOMBRE = new javax.swing.JTextField();
+        jTextField_NOMBRES = new javax.swing.JTextField();
         jLabel_id = new javax.swing.JLabel();
-        jTextField_ID = new javax.swing.JTextField();
+        jTextField_cedula = new javax.swing.JTextField();
         jLabel_direccion = new javax.swing.JLabel();
         jTextField_direccion = new javax.swing.JTextField();
         jLabel_celular = new javax.swing.JLabel();
         jTextField_telefono = new javax.swing.JTextField();
         jLabel_sueldo = new javax.swing.JLabel();
-        jTextField_sueldo = new javax.swing.JTextField();
+        jTextField_email = new javax.swing.JTextField();
         jLabel_rol = new javax.swing.JLabel();
-        jComboBox_cargos = new javax.swing.JComboBox<>();
+        jLabel_apellidos = new javax.swing.JLabel();
+        jTextField_apellido1 = new javax.swing.JTextField();
+        jLabel_apellidos1 = new javax.swing.JLabel();
+        jTextField_apellido2 = new javax.swing.JTextField();
+        jTextField_cargo = new javax.swing.JTextField();
+        jLabel_rol1 = new javax.swing.JLabel();
+        jTextField_Sede = new javax.swing.JTextField();
+        jTextField_password = new javax.swing.JTextField();
+        jLabel_rol2 = new javax.swing.JLabel();
+        jLabel_rol3 = new javax.swing.JLabel();
+        jTextField_ID_Corp = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton_atras = new javax.swing.JButton();
         jButton_registrar = new javax.swing.JButton();
@@ -60,20 +125,20 @@ public class agregar_empleado extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
 
         jLabel_nombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_nombre.setText("Nombre Completo:");
+        jLabel_nombre.setText("Nombres:");
 
-        jTextField_NOMBRE.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_NOMBRES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_NOMBREActionPerformed(evt);
+                jTextField_NOMBRESActionPerformed(evt);
             }
         });
 
         jLabel_id.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_id.setText("ID:");
+        jLabel_id.setText("Cedula:");
 
-        jTextField_ID.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_IDActionPerformed(evt);
+                jTextField_cedulaActionPerformed(evt);
             }
         });
 
@@ -84,19 +149,39 @@ public class agregar_empleado extends javax.swing.JDialog {
         jLabel_celular.setText("Celular:");
 
         jLabel_sueldo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_sueldo.setText("Sueldo:");
+        jLabel_sueldo.setText("Correo:");
 
-        jTextField_sueldo.setToolTipText("");
+        jTextField_email.setToolTipText("");
 
         jLabel_rol.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_rol.setText("Rol:");
 
-        jComboBox_cargos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_cargos.addActionListener(new java.awt.event.ActionListener() {
+        jLabel_apellidos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_apellidos.setText("Primer apellido:");
+
+        jTextField_apellido1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_cargosActionPerformed(evt);
+                jTextField_apellido1ActionPerformed(evt);
             }
         });
+
+        jLabel_apellidos1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_apellidos1.setText("Segundo apellido:");
+
+        jTextField_apellido2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_apellido2ActionPerformed(evt);
+            }
+        });
+
+        jLabel_rol1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_rol1.setText("Sede:");
+
+        jLabel_rol2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_rol2.setText("Contraseña:");
+
+        jLabel_rol3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_rol3.setText("ID Corporativo:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,49 +190,83 @@ public class agregar_empleado extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_rol3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_apellidos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_apellidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_sueldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_celular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_rol, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox_cargos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField_telefono)
-                    .addComponent(jTextField_sueldo)
-                    .addComponent(jTextField_NOMBRE)
-                    .addComponent(jTextField_ID)
-                    .addComponent(jTextField_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel_rol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_rol1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_rol2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField_password)
+                    .addComponent(jTextField_Sede)
+                    .addComponent(jTextField_apellido1)
+                    .addComponent(jTextField_apellido2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_telefono)
+                            .addComponent(jTextField_email)
+                            .addComponent(jTextField_NOMBRES)
+                            .addComponent(jTextField_cedula)
+                            .addComponent(jTextField_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(jTextField_cargo))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jTextField_ID_Corp))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_NOMBRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_NOMBRES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_nombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_apellidos))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_apellidos1))
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_id)
-                    .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextField_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_direccion)
                     .addComponent(jTextField_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_celular)
                     .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_sueldo)
-                    .addComponent(jTextField_sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox_cargos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_rol)))
+                    .addComponent(jTextField_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_rol)
+                    .addComponent(jTextField_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_rol1)
+                    .addComponent(jTextField_Sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_rol2)
+                    .addComponent(jTextField_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_rol3)
+                    .addComponent(jTextField_ID_Corp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
 
         jButton_atras.setText("Atras");
@@ -229,9 +348,9 @@ public class agregar_empleado extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,25 +363,29 @@ public class agregar_empleado extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField_NOMBREActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NOMBREActionPerformed
+    private void jTextField_NOMBRESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NOMBRESActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_NOMBREActionPerformed
+    }//GEN-LAST:event_jTextField_NOMBRESActionPerformed
 
-    private void jTextField_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_IDActionPerformed
+    private void jTextField_cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_cedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_IDActionPerformed
-
-    private void jComboBox_cargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_cargosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_cargosActionPerformed
+    }//GEN-LAST:event_jTextField_cedulaActionPerformed
 
     private void jButton_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atrasActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton_atrasActionPerformed
 
     private void jButton_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registrarActionPerformed
-        this.jLabel_mensaje.setText("REGISTRADO CON EXITO");
+        this.registrar();
     }//GEN-LAST:event_jButton_registrarActionPerformed
+
+    private void jTextField_apellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_apellido1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_apellido1ActionPerformed
+
+    private void jTextField_apellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_apellido2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_apellido2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,22 +435,32 @@ public class agregar_empleado extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_atras;
     private javax.swing.JButton jButton_registrar;
-    private javax.swing.JComboBox<String> jComboBox_cargos;
     private javax.swing.JLabel jLabel_TITULO;
+    private javax.swing.JLabel jLabel_apellidos;
+    private javax.swing.JLabel jLabel_apellidos1;
     private javax.swing.JLabel jLabel_celular;
     private javax.swing.JLabel jLabel_direccion;
     private javax.swing.JLabel jLabel_id;
     private javax.swing.JLabel jLabel_mensaje;
     private javax.swing.JLabel jLabel_nombre;
     private javax.swing.JLabel jLabel_rol;
+    private javax.swing.JLabel jLabel_rol1;
+    private javax.swing.JLabel jLabel_rol2;
+    private javax.swing.JLabel jLabel_rol3;
     private javax.swing.JLabel jLabel_sueldo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_CONTENIDO;
-    private javax.swing.JTextField jTextField_ID;
-    private javax.swing.JTextField jTextField_NOMBRE;
+    private javax.swing.JTextField jTextField_ID_Corp;
+    private javax.swing.JTextField jTextField_NOMBRES;
+    private javax.swing.JTextField jTextField_Sede;
+    private javax.swing.JTextField jTextField_apellido1;
+    private javax.swing.JTextField jTextField_apellido2;
+    private javax.swing.JTextField jTextField_cargo;
+    private javax.swing.JTextField jTextField_cedula;
     private javax.swing.JTextField jTextField_direccion;
-    private javax.swing.JTextField jTextField_sueldo;
+    private javax.swing.JTextField jTextField_email;
+    private javax.swing.JTextField jTextField_password;
     private javax.swing.JTextField jTextField_telefono;
     // End of variables declaration//GEN-END:variables
 }

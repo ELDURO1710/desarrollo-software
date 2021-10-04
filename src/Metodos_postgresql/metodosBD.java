@@ -27,21 +27,22 @@ public class metodosBD {
 
     
     
-    public int guardar_persona(String nombres, String apellido1, String apellido2, String celular, String direccion, String correo) {
+    public int guardar_persona(String cedula, String nombres, String celular, String direccion, String apellido1, String apellido2, String correo) {
         int resultado = 0;
         Connection conexion;
 
-        String sentencia_guardar = ("INSERT INTO persona (nombre,apellido1,apellido2,celular,direccion,correo) VALUES  (?,?,?,?,?,?)");
+        String sentencia_guardar = ("INSERT INTO persona (id,nombre,celular,direccion,apellido1,apellido2,correo) VALUES  (?,?,?,?,?,?,?)");
 
         try {
             conexion = (Connection) ConexionBD.Conectar();
             sentencia_preparada = conexion.prepareStatement(sentencia_guardar);
-            sentencia_preparada.setString(1, nombres);
-            sentencia_preparada.setString(2, apellido1);
-            sentencia_preparada.setString(3, apellido2);
-            sentencia_preparada.setString(4, celular);
-            sentencia_preparada.setString(5, direccion);
-            sentencia_preparada.setString(6, correo);
+            sentencia_preparada.setInt(1, Integer.parseInt(cedula));
+            sentencia_preparada.setString(2, nombres);
+            sentencia_preparada.setInt(3, Integer.parseInt(celular));
+            sentencia_preparada.setString(4, direccion);
+            sentencia_preparada.setString(5, apellido1);
+            sentencia_preparada.setString(6, apellido2);
+            sentencia_preparada.setString(7, correo);
 
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
@@ -51,6 +52,35 @@ public class metodosBD {
         }
 
         return resultado;
+    }
+    
+    public int agregar_empleado(String cedula, String nombres, String celular, String direccion, String apellido1, String apellido2, String correo, String sede, String cargo, String contrasena, String IDCORP, String estado) {
+        ResultSet resultado = null;
+        int resultadito = 0;
+        Connection conexion;
+        this.guardar_persona(cedula, nombres, celular, direccion, apellido1, apellido2, correo);
+
+        String sentencia_guardar = ("INSERT INTO empleado VALUES  (?,?,?,?,?,?)");
+
+        try {
+            conexion = (Connection) ConexionBD.Conectar();
+            sentencia_preparada = conexion.prepareStatement(sentencia_guardar);
+            sentencia_preparada.setInt(1, Integer.parseInt(cedula));
+            sentencia_preparada.setInt(2, Integer.parseInt(sede));
+            sentencia_preparada.setInt(3, Integer.parseInt(cargo));
+            sentencia_preparada.setString(4, contrasena);
+            sentencia_preparada.setInt(5, Integer.parseInt(IDCORP));
+            sentencia_preparada.setString(6, estado);
+
+            resultado = sentencia_preparada.executeQuery();
+            resultado.next();
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return resultadito;
     }
     
     
