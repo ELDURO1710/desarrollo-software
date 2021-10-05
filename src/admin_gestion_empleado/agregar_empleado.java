@@ -86,7 +86,7 @@ public class agregar_empleado extends javax.swing.JDialog {
 
         if (this.escorreo(correo) && this.sololetras(nombres) && this.sololetras(apellido1) && this.sololetras(apellido2) && this.celulares(celular) && this.solonumeros(cedula) && this.solonumeros(cargo) && this.solonumeros(sede) && this.solonumeros(IDCORP)) {
 
-            metodos.agregar_empleado(cedula, nombres, celular, direccion, apellido1, apellido2, correo, sede, cargo, contrasena, IDCORP, "1");
+            metodos.agregar_empleado(cedula, nombres, celular, direccion, apellido1, apellido2, correo, sede, cargo, contrasena, IDCORP, "activo");
             this.jLabel_mensaje.setText("REGISTRADO CON EXITO");
         }
     }
