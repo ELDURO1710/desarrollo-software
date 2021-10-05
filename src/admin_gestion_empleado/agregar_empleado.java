@@ -53,7 +53,9 @@ public class agregar_empleado extends javax.swing.JDialog {
 
     public boolean escorreo(String cadena) {
         boolean resul = (cadena.endsWith(".com") && cadena.contains("@"));
-        this.jLabel_mensaje.setText("Direccion de correo invalida");
+        if(!resul){
+            this.jLabel_mensaje.setText("Direccion de correo invalida");
+        }
         return resul;
     }
 
