@@ -40,15 +40,27 @@ public class agregar_empleado extends javax.swing.JDialog {
     }
 
     public boolean sololetras(String cadena) {
+        boolean respuesta=true;
         for (int x = 0; x < cadena.length(); x++) {
             char c = cadena.charAt(x);
             // Si no está entre a y z, ni entre A y Z, ni es un espacio
             if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
                 this.jLabel_mensaje.setText("Evite usar un numero como nombre");
-                return false;
+                respuesta = false;
             }
         }
-        return true;
+        return respuesta;
+    }
+    
+    public boolean celulares(String cadena){
+        boolean respuesta = false;
+        if(this.solonumeros(cadena) && (cadena.length() <= 10)){
+            respuesta=true;
+        }
+        else{
+            this.jLabel_mensaje.setText("numero mayor a 10 digitos");
+        }
+        return respuesta;
     }
 
     public boolean escorreo(String cadena) {
@@ -72,7 +84,7 @@ public class agregar_empleado extends javax.swing.JDialog {
         String contrasena = this.jTextField_password.getText();
         String IDCORP = this.jTextField_ID_Corp.getText();
 
-        if (this.escorreo(correo) && this.sololetras(nombres) && this.sololetras(apellido1) && this.sololetras(apellido2) && this.solonumeros(celular) && this.solonumeros(cedula) && this.solonumeros(cargo) && this.solonumeros(sede) && this.solonumeros(IDCORP)) {
+        if (this.escorreo(correo) && this.sololetras(nombres) && this.sololetras(apellido1) && this.sololetras(apellido2) && this.celulares(celular) && this.solonumeros(cedula) && this.solonumeros(cargo) && this.solonumeros(sede) && this.solonumeros(IDCORP)) {
 
             metodos.agregar_empleado(cedula, nombres, celular, direccion, apellido1, apellido2, correo, sede, cargo, contrasena, IDCORP, "1");
             this.jLabel_mensaje.setText("REGISTRADO CON EXITO");
