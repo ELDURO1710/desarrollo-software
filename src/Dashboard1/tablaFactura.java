@@ -18,8 +18,10 @@ import modulos.menu_admin;
  * @author DANILO
  */
 public class tablaFactura extends javax.swing.JFrame {
-        private List<Factura> facturas;
+
+    private List<Factura> facturas;
     metodosBD metodos = new metodosBD();
+
     /**
      * Creates new form tablaFactura
      */
@@ -28,17 +30,17 @@ public class tablaFactura extends javax.swing.JFrame {
         mostrarFactura();
         this.setLocationRelativeTo(null);
     }
-    
-        public void mostrarFactura() {
-        
+
+    public void mostrarFactura() {
+
         DefaultTableModel modeloDatos = (DefaultTableModel) tablaFactura.getModel();
-        
+
         while (modeloDatos.getRowCount() > 0) {
             modeloDatos.removeRow(modeloDatos.getRowCount() - 1);
         }
-        List<String[]> lista = metodos.consultarPersonas();
+        List<String[]> lista = metodos.consultarFactura();
         this.facturas = new ArrayList<>();
-        
+
         for (int i = 0; i < lista.size(); i++) {
             String[] row = lista.get(i);
             Object[] fila = new Object[]{row[0], row[1], row[2], row[3], row[4], row[5], row[6]};
@@ -51,7 +53,7 @@ public class tablaFactura extends javax.swing.JFrame {
             //direccion
             ); // correo
             modeloDatos.addRow(fila);
-            
+
         }
     }
 
@@ -122,7 +124,7 @@ public class tablaFactura extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        Dashboard regresar= new Dashboard();
+        Dashboard regresar = new Dashboard();
         regresar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
