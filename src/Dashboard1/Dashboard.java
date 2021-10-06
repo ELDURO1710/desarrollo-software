@@ -47,9 +47,9 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
                                       row[2], // celular 
                                       row[3], //apellido1
                                       row[4], //apellido2
-                                      row[5], Boolean.getBoolean(row[6])
-                                        //direccion
-                                      )); // correo
+                                      row[5], //direccion 
+                                      Boolean.getBoolean(row[6]) //correo
+                                      ));
             modeloDatos.addRow(fila);
     
         }
