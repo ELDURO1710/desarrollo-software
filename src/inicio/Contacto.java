@@ -56,7 +56,7 @@ public class Contacto extends javax.swing.JDialog {
         jLabel_nombre3.setText("Danilo Arévalo - 1926167");
 
         jLabel_nombre4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_nombre4.setText("Wilmer Bautista - sisas");
+        jLabel_nombre4.setText("Wilmer Bautista - 1740641");
         jLabel_nombre4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
