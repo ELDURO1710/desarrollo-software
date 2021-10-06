@@ -5,6 +5,7 @@
  */
 package admin_gestion_cliente;
 
+import Metodos_postgresql.metodosBD;
 import modulos.*;
 
 /**
@@ -21,6 +22,60 @@ public class agregar_cliente extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+     metodosBD metodos = new metodosBD();
+
+    public boolean solonumeros(String cadena) {
+        boolean respuesta=false;
+        try {
+            Integer.parseInt(cadena);
+            respuesta= true;
+        } catch (NumberFormatException x) {
+            this.jLabel_mensaje.setText("Error: Campos numericos con letras");
+        }
+        return respuesta;
+    }
+
+    public boolean sololetras(String cadena) {
+        boolean respuesta=true;
+        for (int x = 0; x < cadena.length(); x++) {
+            char c = cadena.charAt(x);
+            // Si no está entre a y z, ni entre A y Z, ni es un espacio
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                this.jLabel_mensaje.setText("Evite usar un numero como nombre");
+                respuesta = false;
+            }
+        }
+        return respuesta;
+    }
+    
+    public boolean celulares(String cadena){
+        boolean respuesta = false;
+        if((this.solonumeros(cadena)) && (11 > cadena.length())){
+            respuesta=true;
+        }
+        else{
+            this.jLabel_mensaje.setText("numero mayor a 10 digitos");
+        }
+        return respuesta;
+    }
+
+    public boolean escorreo(String cadena) {
+        boolean resul = (cadena.endsWith(".com") && cadena.contains("@"));
+        if(!resul){
+            this.jLabel_mensaje.setText("Direccion de correo invalida");
+        }
+        return resul;
+    }
+    
+    public void registrarCliente(){
+        
+        String nombre = this.jTextField_NOMBRE.getText();
+        String ID = this.jTextField_ID.getText();
+        String Direccion = this.jTextField_direccion.getText();
+        
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,10 +97,10 @@ public class agregar_cliente extends javax.swing.JDialog {
         jTextField_direccion = new javax.swing.JTextField();
         jLabel_celular = new javax.swing.JLabel();
         jTextField_telefono = new javax.swing.JTextField();
-        jLabel_sueldo = new javax.swing.JLabel();
+        jLabel_correo = new javax.swing.JLabel();
         jTextField_sueldo = new javax.swing.JTextField();
-        jLabel_cargo = new javax.swing.JLabel();
-        jComboBox_cargos = new javax.swing.JComboBox<>();
+        jLabel1Contraseña = new javax.swing.JLabel();
+        jTextFieldContraseña = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton_atras = new javax.swing.JButton();
         jButton_registrar = new javax.swing.JButton();
@@ -83,20 +138,13 @@ public class agregar_cliente extends javax.swing.JDialog {
         jLabel_celular.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_celular.setText("Celular:");
 
-        jLabel_sueldo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_sueldo.setText("Sueldo:");
+        jLabel_correo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_correo.setText("Correo:");
+        jLabel_correo.setToolTipText("");
 
         jTextField_sueldo.setToolTipText("");
 
-        jLabel_cargo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_cargo.setText("Cargo:");
-
-        jComboBox_cargos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_cargos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_cargosActionPerformed(evt);
-            }
-        });
+        jLabel1Contraseña.setText("Contraseña");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,21 +152,22 @@ public class agregar_cliente extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel_sueldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_celular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1Contraseña)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel_correo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_celular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox_cargos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField_telefono)
                     .addComponent(jTextField_sueldo)
                     .addComponent(jTextField_NOMBRE)
                     .addComponent(jTextField_ID)
-                    .addComponent(jTextField_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jTextFieldContraseña))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -142,12 +191,13 @@ public class agregar_cliente extends javax.swing.JDialog {
                     .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_sueldo)
+                    .addComponent(jLabel_correo)
                     .addComponent(jTextField_sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox_cargos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_cargo)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1Contraseña)
+                    .addComponent(jTextFieldContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
 
         jButton_atras.setText("Atras");
@@ -200,17 +250,17 @@ public class agregar_cliente extends javax.swing.JDialog {
         jPanel_CONTENIDOLayout.setHorizontalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(119, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 109, Short.MAX_VALUE))
             .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_TITULO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
-                        .addGap(0, 33, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CONTENIDOLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 33, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel_CONTENIDOLayout.setVerticalGroup(
@@ -219,7 +269,7 @@ public class agregar_cliente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel_TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -251,10 +301,6 @@ public class agregar_cliente extends javax.swing.JDialog {
     private void jTextField_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_IDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_IDActionPerformed
-
-    private void jComboBox_cargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_cargosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_cargosActionPerformed
 
     private void jButton_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atrasActionPerformed
         this.dispose();
@@ -324,18 +370,18 @@ public class agregar_cliente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_atras;
     private javax.swing.JButton jButton_registrar;
-    private javax.swing.JComboBox<String> jComboBox_cargos;
+    private javax.swing.JLabel jLabel1Contraseña;
     private javax.swing.JLabel jLabel_TITULO;
-    private javax.swing.JLabel jLabel_cargo;
     private javax.swing.JLabel jLabel_celular;
+    private javax.swing.JLabel jLabel_correo;
     private javax.swing.JLabel jLabel_direccion;
     private javax.swing.JLabel jLabel_id;
     private javax.swing.JLabel jLabel_mensaje;
     private javax.swing.JLabel jLabel_nombre;
-    private javax.swing.JLabel jLabel_sueldo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_CONTENIDO;
+    private javax.swing.JTextField jTextFieldContraseña;
     private javax.swing.JTextField jTextField_ID;
     private javax.swing.JTextField jTextField_NOMBRE;
     private javax.swing.JTextField jTextField_direccion;
