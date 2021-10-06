@@ -48,18 +48,18 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="119" max="32767" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="109" max="32767" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel_TITULO" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
+                      <Component id="jLabel_TITULO" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -72,7 +72,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel_TITULO" min="-2" pref="25" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="jPanel1" min="-2" pref="182" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -100,22 +100,24 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel_sueldo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel_celular" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel_direccion" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel_id" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel_nombre" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel_cargo" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel1Contraseña" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel_correo" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_celular" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_direccion" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_id" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel_nombre" alignment="0" pref="119" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jComboBox_cargos" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField_telefono" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField_sueldo" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField_NOMBRE" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField_ID" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextField_direccion" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="jTextField_direccion" alignment="0" pref="148" max="32767" attributes="0"/>
+                          <Component id="jTextFieldContraseña" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -146,14 +148,15 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_sueldo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_correo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField_sueldo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBox_cargos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_cargo" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1Contraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -197,10 +200,11 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_telefono">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_sueldo">
+            <Component class="javax.swing.JLabel" name="jLabel_correo">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Sueldo:"/>
+                <Property name="text" type="java.lang.String" value="Correo:"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_sueldo">
@@ -208,29 +212,12 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_cargo">
+            <Component class="javax.swing.JLabel" name="jLabel1Contrase&#xf1;a">
               <Properties>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Cargo:"/>
+                <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox_cargos">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_cargosActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
+            <Component class="javax.swing.JTextField" name="jTextFieldContrase&#xf1;a">
             </Component>
           </SubComponents>
         </Container>

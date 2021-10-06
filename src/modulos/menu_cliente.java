@@ -8,6 +8,8 @@ package modulos;
 import cliente.consultar_envio;
 import cliente.cotizar_envio;
 import cliente.mi_perfil;
+import empleado_gestion_pago.dialogo_de_pago;
+import empleado_gestion_pickup.programar_pickup;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import inicio.Inicio;
@@ -98,7 +100,7 @@ public class menu_cliente extends javax.swing.JFrame {
             }
         });
 
-        jButton_cobrar.setText("Mi Perfil");
+        jButton_cobrar.setText("pagar recibo");
         jButton_cobrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_cobrarActionPerformed(evt);
@@ -118,18 +120,19 @@ public class menu_cliente extends javax.swing.JFrame {
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
-                        .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel_pickuo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_PICKUP))
-                        .addGap(65, 65, 65)
-                        .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jButton_cobrar)
-                            .addComponent(jLabel_cobrar)))
-                    .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jButton_rastreo)
-                        .addComponent(jLabel_rastreo)))
+                .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel_pickuo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_PICKUP))
+                .addGap(65, 65, 65)
+                .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButton_cobrar)
+                    .addComponent(jLabel_cobrar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CONTENIDOLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButton_rastreo)
+                    .addComponent(jLabel_rastreo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -146,10 +149,11 @@ public class menu_cliente extends javax.swing.JFrame {
                 .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_PICKUP)
                     .addComponent(jButton_cobrar))
-                .addGap(18, 42, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel_rastreo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_rastreo))
+                .addComponent(jButton_rastreo)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jButton_atras.setText("Cerrar Sesion");
@@ -217,15 +221,15 @@ public class menu_cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_PICKUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PICKUPActionPerformed
-        cotizar_envio op_pickup;
-        op_pickup = new cotizar_envio(this,true);
+        programar_pickup op_pickup;
+        op_pickup = new programar_pickup(this,true);
         op_pickup.setAlwaysOnTop (true);
-        op_pickup.setVisible(true);
+        op_pickup.setVisible(true); 
     }//GEN-LAST:event_jButton_PICKUPActionPerformed
 
     private void jButton_cobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cobrarActionPerformed
-        mi_perfil dialopago;
-        dialopago = new mi_perfil(this,true);
+        dialogo_de_pago dialopago;
+        dialopago = new dialogo_de_pago(this,true);
         dialopago.setAlwaysOnTop (true);
         dialopago.setVisible(true);
     }//GEN-LAST:event_jButton_cobrarActionPerformed
