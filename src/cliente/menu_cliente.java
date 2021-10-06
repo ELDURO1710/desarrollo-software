@@ -7,7 +7,7 @@ package cliente;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import modulos.Inicio;
+import inicio.Inicio;
 
 /**
  *

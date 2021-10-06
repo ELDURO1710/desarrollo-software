@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package cliente;
-import usuario_operador.*;
-import usuario_operador.menu_operador;
+import modulos.menu_operador;
 
 /**
  *

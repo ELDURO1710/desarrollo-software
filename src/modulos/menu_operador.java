@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package usuario_operador;
+package modulos;
 
+import empleado_gestion_rastreo.rastrear_paquete;
+import empleado_gestion_pago.dialogo_de_pago;
+import empleado_gestion_pickup.programar_pickup;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import modulos.Inicio;
+import inicio.Inicio;
 
 /**
  *

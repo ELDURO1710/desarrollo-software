@@ -5,8 +5,6 @@
  */
 package cliente;
 
-import usuario_operador.*;
-
 /**
  *
  * @author juandiazvillota

@@ -5,6 +5,7 @@
  */
 package modulos;
 
+import inicio.Inicio;
 import Dashboard1.Dashboard;
 import admin_gestion_cliente.gestion_de_cliente;
 import admin_gestion_empleado.gestion_de_empleado;

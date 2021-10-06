@@ -3,28 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modulos;
+package inicio;
 
+import Metodos_postgresql.*;
+import cliente.menu_cliente;
 import java.awt.Image;
-import java.sql.*;
 import javax.swing.ImageIcon;
-import usuario_operador.menu_operador;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modulos.menu_admin;
+import modulos.menu_operador;
 
 /**
  *
  * @author juandiazvillota
  */
-public class Inicio extends javax.swing.JFrame {
+public class login extends javax.swing.JFrame {
 
     /**
-     * Creates new form login
+     * Creates new form bienvenido
      */
-    public Inicio() {
+    public login() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
         imagenes();
     }
+    
+    
     
     public void imagenes(){
         ImageIcon imagencaja = new ImageIcon("src/imagenes/caja.png");
@@ -33,6 +40,53 @@ public class Inicio extends javax.swing.JFrame {
         ImageIcon imagen_caja = new ImageIcon(imgcaja);
         this.jLabel_LOGO.setIcon(imagen_caja);
         this.jLabel_LOGO.setText("");
+    }
+    
+    public boolean solonumeros(String cadena){
+        try{
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException x){
+            return false;
+        }
+    }
+    
+    metodosBD metodos = new metodosBD();
+    
+    public void ingresar(){
+        String usuario = this.jTextField_ID.getText();
+        int user=Integer.valueOf(usuario);
+        String pass = this.jTextField_contrasena.getText();
+        
+        if(solonumeros(this.jTextField_ID.getText())){
+            switch (metodos.buscar_personal(pass, user)){
+                case 0:
+                    this.jLabel_mensaje.setText("Contraseña y/o usuario incorrectos");
+                    break;
+                case 1:
+                    this.jLabel_mensaje.setText("Bienvenido a Easy eComerce!");//cliente
+                    menu_cliente cliente;
+                    cliente = new menu_cliente();
+                    cliente.setVisible(true);
+                    this.dispose();
+                    break;
+                case 2:
+                    this.jLabel_mensaje.setText("Acceso Empleados");//empleados
+                    menu_operador empleado;
+                    empleado = new menu_operador();
+                    empleado.setVisible(true);
+                    this.dispose();
+                    break;
+                case 3:
+                    this.jLabel_mensaje.setText("Acceso Administrador");//administradores
+                    menu_admin admin;
+                    admin = new menu_admin();
+                    admin.setVisible(true);
+                    this.dispose();
+                    break;
+            }
+            this.jLabel_mensaje.setText(pass);
+        }
     }
 
     /**
@@ -47,71 +101,110 @@ public class Inicio extends javax.swing.JFrame {
         jPanel_CONTENIDO = new javax.swing.JPanel();
         jLabel_TITULO1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton_registro = new javax.swing.JButton();
-        jButton_login = new javax.swing.JButton();
-        jButton_contactenos = new javax.swing.JButton();
+        jLabel_Usuario = new javax.swing.JLabel();
+        jTextField_ID = new javax.swing.JTextField();
+        jLabel_password = new javax.swing.JLabel();
+        jButton_ingresar = new javax.swing.JButton();
+        jButton_Recuperarcontrasena = new javax.swing.JButton();
+        jButton__atras = new javax.swing.JButton();
+        jLabel_mensaje = new javax.swing.JLabel();
+        jTextField_contrasena = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel_TITULO = new javax.swing.JLabel();
         jLabel_LOGO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jLabel_TITULO1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_TITULO1.setText("¡Tus paquetes al instante!");
 
-        jButton_registro.setText("Registrarme");
-        jButton_registro.addActionListener(new java.awt.event.ActionListener() {
+        jLabel_Usuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_Usuario.setText("Usuario:");
+
+        jTextField_ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_registroActionPerformed(evt);
+                jTextField_IDActionPerformed(evt);
             }
         });
 
-        jButton_login.setText("Ya tengo cuenta");
-        jButton_login.addActionListener(new java.awt.event.ActionListener() {
+        jLabel_password.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_password.setText("Contraseña:");
+
+        jButton_ingresar.setText("Siguiente");
+        jButton_ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_loginActionPerformed(evt);
+                jButton_ingresarActionPerformed(evt);
+            }
+        });
+        jButton_ingresar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton_ingresarKeyPressed(evt);
             }
         });
 
-        jButton_contactenos.setText("Contactenos");
-        jButton_contactenos.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Recuperarcontrasena.setText("Recuperar contraseña");
+        jButton_Recuperarcontrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_contactenosActionPerformed(evt);
+                jButton_RecuperarcontrasenaActionPerformed(evt);
             }
         });
+
+        jButton__atras.setText("Atras");
+        jButton__atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton__atrasActionPerformed(evt);
+            }
+        });
+
+        jLabel_mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_mensaje.setText("mensaje");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(12, Short.MAX_VALUE)
-                        .addComponent(jButton_registro)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton_login))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jButton_contactenos)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jLabel_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField_ID, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(jTextField_contrasena))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton__atras)
+                .addGap(0, 0, 0)
+                .addComponent(jButton_Recuperarcontrasena)
+                .addGap(0, 0, 0)
+                .addComponent(jButton_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_contactenos, jButton_login, jButton_registro});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_registro)
-                    .addComponent(jButton_login))
+                    .addComponent(jLabel_Usuario)
+                    .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_contactenos)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_password)
+                    .addComponent(jTextField_contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_ingresar)
+                    .addComponent(jButton_Recuperarcontrasena)
+                    .addComponent(jButton__atras))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel_mensaje)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jLabel_TITULO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -169,7 +262,8 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CONTENIDOLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel_CONTENIDOLayout.setVerticalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +283,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,30 +296,31 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registroActionPerformed
+    private void jTextField_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_IDActionPerformed
         // TODO add your handling code here:
-        
-        registro registrar;
-        registrar = new registro(this,true);
-        registrar.setAlwaysOnTop (true);
-        registrar.setVisible(true);
-    }//GEN-LAST:event_jButton_registroActionPerformed
+    }//GEN-LAST:event_jTextField_IDActionPerformed
 
-    private void jButton_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loginActionPerformed
-        login acceso = new login();
-        acceso.setVisible(true);
+    private void jButton_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ingresarActionPerformed
+        ingresar(); //esta funcion se activara cuando resolvamos el login, mientras, ingrese 1 para cliente, 2 para operador y 3 para admin
+
+    }//GEN-LAST:event_jButton_ingresarActionPerformed
+
+    private void jButton_ingresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton_ingresarKeyPressed
+
+    }//GEN-LAST:event_jButton_ingresarKeyPressed
+
+    private void jButton_RecuperarcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RecuperarcontrasenaActionPerformed
+        recupera recuperacion;
+        recuperacion = new recupera(this,true);
+        recuperacion.setAlwaysOnTop (true);
+        recuperacion.setVisible(true);   
+    }//GEN-LAST:event_jButton_RecuperarcontrasenaActionPerformed
+
+    private void jButton__atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton__atrasActionPerformed
+        Inicio atras = new Inicio();
+        atras.setVisible(true);
         this.dispose();
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_loginActionPerformed
-
-    private void jButton_contactenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_contactenosActionPerformed
-        // TODO add your handling code here:
-        Contacto contac;
-        contac = new Contacto(this,true);
-        contac.setAlwaysOnTop (true);
-        contac.setVisible(true);
-    }//GEN-LAST:event_jButton_contactenosActionPerformed
+    }//GEN-LAST:event_jButton__atrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,13 +339,13 @@ public class Inicio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -258,21 +353,26 @@ public class Inicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio().setVisible(true);
+                new login().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_contactenos;
-    private javax.swing.JButton jButton_login;
-    private javax.swing.JButton jButton_registro;
+    private javax.swing.JButton jButton_Recuperarcontrasena;
+    private javax.swing.JButton jButton__atras;
+    private javax.swing.JButton jButton_ingresar;
     private javax.swing.JLabel jLabel_LOGO;
     private javax.swing.JLabel jLabel_TITULO;
     private javax.swing.JLabel jLabel_TITULO1;
+    private javax.swing.JLabel jLabel_Usuario;
+    private javax.swing.JLabel jLabel_mensaje;
+    private javax.swing.JLabel jLabel_password;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel_CONTENIDO;
+    private javax.swing.JTextField jTextField_ID;
+    private javax.swing.JTextField jTextField_contrasena;
     // End of variables declaration//GEN-END:variables
 }
