@@ -5,6 +5,7 @@
  */
 package admin_gestion_empleado;
 
+import Metodos_postgresql.metodosBD;
 import modulos.*;
 
 /**
@@ -21,6 +22,68 @@ public class borrar_empleado extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    metodosBD metodos = new metodosBD();
+
+    public boolean solonumeros(String cadena) {
+        boolean respuesta=false;
+        try {
+            Integer.parseInt(cadena);
+            respuesta= true;
+        } catch (NumberFormatException x) {
+            this.jLabel_mensaje.setText("Error: Campos numericos con letras");
+        }
+        return respuesta;
+    }
+
+    public boolean sololetras(String cadena) {
+        boolean respuesta=true;
+        for (int x = 0; x < cadena.length(); x++) {
+            char c = cadena.charAt(x);
+            // Si no está entre a y z, ni entre A y Z, ni es un espacio
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                this.jLabel_mensaje.setText("Error: Campos de texto con numeros");
+                respuesta = false;
+            }
+        }
+        return respuesta;
+    }
+    
+    public boolean celulares(String cadena){
+        boolean respuesta = false;
+        if(this.solonumeros(cadena) && (cadena.length() < 13)){
+            respuesta=true;
+        }
+        else{
+            this.jLabel_mensaje.setText("Error: numero telefonico mayor a 10 digitos");
+        }
+        return respuesta;
+    }
+
+    public boolean escorreo(String cadena) {
+        boolean resul = ((cadena.endsWith(".com") || (cadena.endsWith(".co"))) && cadena.contains("@"));
+        if(!resul){
+            this.jLabel_mensaje.setText("Error: Direccion de correo invalida");
+        }
+        return resul;
+    }
+    
+    public void eliminar(){
+        if(this.jTextField_cedula.getText().isEmpty())
+        {
+            this.jLabel_mensaje.setText("Error: por favor rellene el campo Cedula");
+        }
+        else
+        {
+            if(metodos.buscar_empleado(this.jTextField_cedula.getText())==null){
+                this.jLabel_mensaje.setText("Empleado no encontrado");
+            }
+            else{
+                metodos.inactivar_empleado(this.jTextField_cedula.getText());
+                this.jLabel_mensaje.setText("Empleado dado de baja");
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,15 +94,16 @@ public class borrar_empleado extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane1 = new javax.swing.JSplitPane();
         jPanel_CONTENIDO = new javax.swing.JPanel();
         jLabel_TITULO = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel_nombres = new javax.swing.JLabel();
-        jTextField_NOMBRES = new javax.swing.JTextField();
+        jLabel_ID_Corporativo = new javax.swing.JLabel();
+        jTextField_cedula = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton_atras = new javax.swing.JButton();
         jButton_borrar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel_mensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -47,12 +111,12 @@ public class borrar_empleado extends javax.swing.JDialog {
         jLabel_TITULO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_TITULO.setText("Borrar Empleado");
 
-        jLabel_nombres.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_nombres.setText("ID:");
+        jLabel_ID_Corporativo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_ID_Corporativo.setText("Cedula:");
 
-        jTextField_NOMBRES.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_NOMBRESActionPerformed(evt);
+                jTextField_cedulaActionPerformed(evt);
             }
         });
 
@@ -62,9 +126,9 @@ public class borrar_empleado extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_nombres)
+                .addComponent(jLabel_ID_Corporativo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_NOMBRES, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -72,8 +136,8 @@ public class borrar_empleado extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_NOMBRES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_nombres))
+                    .addComponent(jTextField_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_ID_Corporativo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -85,21 +149,26 @@ public class borrar_empleado extends javax.swing.JDialog {
         });
 
         jButton_borrar.setText("Borrar");
+        jButton_borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_borrarActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("MENSAJE");
+        jLabel_mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_mensaje.setText("MENSAJE");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
+                .addContainerGap(69, Short.MAX_VALUE)
                 .addComponent(jButton_atras)
                 .addGap(71, 71, 71)
                 .addComponent(jButton_borrar)
-                .addContainerGap(66, Short.MAX_VALUE))
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(69, Short.MAX_VALUE))
+            .addComponent(jLabel_mensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_atras, jButton_borrar});
@@ -112,7 +181,7 @@ public class borrar_empleado extends javax.swing.JDialog {
                     .addComponent(jButton_atras)
                     .addComponent(jButton_borrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -121,12 +190,10 @@ public class borrar_empleado extends javax.swing.JDialog {
         jPanel_CONTENIDOLayout.setHorizontalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel_TITULO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         jPanel_CONTENIDOLayout.setVerticalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,9 +231,13 @@ public class borrar_empleado extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton_atrasActionPerformed
 
-    private void jTextField_NOMBRESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NOMBRESActionPerformed
+    private void jTextField_cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_cedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_NOMBRESActionPerformed
+    }//GEN-LAST:event_jTextField_cedulaActionPerformed
+
+    private void jButton_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_borrarActionPerformed
+        this.eliminar();
+    }//GEN-LAST:event_jButton_borrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,12 +287,13 @@ public class borrar_empleado extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_atras;
     private javax.swing.JButton jButton_borrar;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel_ID_Corporativo;
     private javax.swing.JLabel jLabel_TITULO;
-    private javax.swing.JLabel jLabel_nombres;
+    private javax.swing.JLabel jLabel_mensaje;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_CONTENIDO;
-    private javax.swing.JTextField jTextField_NOMBRES;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTextField jTextField_cedula;
     // End of variables declaration//GEN-END:variables
 }

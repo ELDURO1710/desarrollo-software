@@ -31,12 +31,14 @@ public class agregar_empleado extends javax.swing.JDialog {
     metodosBD metodos = new metodosBD();
 
     public boolean solonumeros(String cadena) {
+        boolean respuesta=false;
         try {
             Integer.parseInt(cadena);
-            return true;
+            respuesta= true;
         } catch (NumberFormatException x) {
-            return false;
+            this.jLabel_mensaje.setText("Error: Campos numericos con letras");
         }
+        return respuesta;
     }
 
     public boolean sololetras(String cadena) {
@@ -54,7 +56,7 @@ public class agregar_empleado extends javax.swing.JDialog {
     
     public boolean celulares(String cadena){
         boolean respuesta = false;
-        if(this.solonumeros(cadena) && (cadena.length() <= 10)){
+        if((this.solonumeros(cadena)) && (11 > cadena.length())){
             respuesta=true;
         }
         else{

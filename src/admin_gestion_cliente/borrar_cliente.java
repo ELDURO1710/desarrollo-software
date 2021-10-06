@@ -5,6 +5,7 @@
  */
 package admin_gestion_cliente;
 
+import Metodos_postgresql.metodosBD;
 import modulos.*;
 
 /**
@@ -21,6 +22,25 @@ public class borrar_cliente extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    metodosBD metodos = new metodosBD();
+    
+    public void eliminar(){
+        if(this.jTextField_Cedula.getText().isEmpty())
+        {
+            this.jLabel_mensaje.setText("Error: por favor rellene el campo cedula");
+        }
+        else
+        {
+            if(metodos.buscar_persona(this.jTextField_Cedula.getText())==null){
+                this.jLabel_mensaje.setText("Persona no encontrada");
+            }
+            else{
+                metodos.inactivar_persona(this.jTextField_Cedula.getText());
+                this.jLabel_mensaje.setText("Persona eliminada");
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,11 +55,11 @@ public class borrar_cliente extends javax.swing.JDialog {
         jLabel_TITULO = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel_nombres = new javax.swing.JLabel();
-        jTextField_NOMBRES = new javax.swing.JTextField();
+        jTextField_Cedula = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton_atras = new javax.swing.JButton();
         jButton_borrar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel_mensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -48,11 +68,11 @@ public class borrar_cliente extends javax.swing.JDialog {
         jLabel_TITULO.setText("Borrar Usuario");
 
         jLabel_nombres.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_nombres.setText("ID:");
+        jLabel_nombres.setText("Cedula:");
 
-        jTextField_NOMBRES.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_Cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_NOMBRESActionPerformed(evt);
+                jTextField_CedulaActionPerformed(evt);
             }
         });
 
@@ -64,7 +84,7 @@ public class borrar_cliente extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_nombres)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_NOMBRES, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -72,7 +92,7 @@ public class borrar_cliente extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_NOMBRES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_nombres))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -86,8 +106,8 @@ public class borrar_cliente extends javax.swing.JDialog {
 
         jButton_borrar.setText("Borrar");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("MENSAJE");
+        jLabel_mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_mensaje.setText("MENSAJE");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -99,7 +119,7 @@ public class borrar_cliente extends javax.swing.JDialog {
                 .addGap(71, 71, 71)
                 .addComponent(jButton_borrar)
                 .addContainerGap(66, Short.MAX_VALUE))
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel_mensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_atras, jButton_borrar});
@@ -112,7 +132,7 @@ public class borrar_cliente extends javax.swing.JDialog {
                     .addComponent(jButton_atras)
                     .addComponent(jButton_borrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -121,13 +141,13 @@ public class borrar_cliente extends javax.swing.JDialog {
         jPanel_CONTENIDOLayout.setHorizontalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel_TITULO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CONTENIDOLayout.createSequentialGroup()
+            .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CONTENIDOLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_CONTENIDOLayout.setVerticalGroup(
@@ -166,9 +186,9 @@ public class borrar_cliente extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton_atrasActionPerformed
 
-    private void jTextField_NOMBRESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NOMBRESActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_NOMBRESActionPerformed
+    private void jTextField_CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_CedulaActionPerformed
+        this.eliminar();// TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_CedulaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,12 +250,12 @@ public class borrar_cliente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_atras;
     private javax.swing.JButton jButton_borrar;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_TITULO;
+    private javax.swing.JLabel jLabel_mensaje;
     private javax.swing.JLabel jLabel_nombres;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_CONTENIDO;
-    private javax.swing.JTextField jTextField_NOMBRES;
+    private javax.swing.JTextField jTextField_Cedula;
     // End of variables declaration//GEN-END:variables
 }

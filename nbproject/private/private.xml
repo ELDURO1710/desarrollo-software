@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DANILO/Documents/GitHub/desarrollo-software/src/Dashboard1/Dashboard.java</file>
-            <file>file:/C:/Users/DANILO/Documents/GitHub/desarrollo-software/src/admin_gestion_empleado/consultar_empleado.java</file>
-            <file>file:/C:/Users/DANILO/Documents/GitHub/desarrollo-software/src/Dashboard1/Entidades/Paquete.java</file>
-            <file>file:/C:/Users/DANILO/Documents/GitHub/desarrollo-software/src/Metodos_postgresql/metodosBD.java</file>
+            <file>file:/Users/juandiazvillota/Documents/GitHub/desarrollo-software/src/Metodos_postgresql/metodosBD.java</file>
+            <file>file:/Users/juandiazvillota/Documents/GitHub/desarrollo-software/src/admin_gestion_empleado/borrar_empleado.java</file>
+            <file>file:/Users/juandiazvillota/Documents/GitHub/desarrollo-software/src/admin_gestion_empleado/actualizar_empleado.java</file>
         </group>
     </open-files>
 </project-private>
