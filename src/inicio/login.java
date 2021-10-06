@@ -120,7 +120,7 @@ public class login extends javax.swing.JFrame {
         jLabel_TITULO1.setText("¡Tus paquetes al instante!");
 
         jLabel_Usuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_Usuario.setText("Usuario:");
+        jLabel_Usuario.setText("Cedula:");
 
         jTextField_ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -67,7 +67,7 @@ public class dialogo_de_pago extends javax.swing.JDialog {
         TITULO.setText("Pago del Recibo");
 
         jLabel_id1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel_id1.setText("Tracking ID:");
+        jLabel_id1.setText("ID factura:");
 
         jTextField_ID_remi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

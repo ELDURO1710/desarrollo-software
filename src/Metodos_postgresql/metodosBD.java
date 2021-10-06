@@ -277,9 +277,9 @@ public class metodosBD {
     //GESTION DE SEDES
     //================================================================================================================================================================
     //Metodos de las sedes
-    public int guardar_sede(String ID, String nombres, String direccion, String telefono) {
+    public Boolean guardar_sede(String ID, String nombres, String direccion, String telefono) {
         ResultSet respuesta_servidor = null;
-        int respuesta = 0;
+        Boolean respuesta_guardado =false;
         Connection conexion;
 
         String sentencia_guardar = ("INSERT INTO sedes (id,nombre, direccion, telefono) VALUES  (?,?,?,?)");
@@ -291,6 +291,7 @@ public class metodosBD {
             sentencia_preparada.setString(2, nombres);
             sentencia_preparada.setString(3, direccion);
             sentencia_preparada.setString(4, telefono);
+            respuesta_guardado=true;
 
             respuesta_servidor = sentencia_preparada.executeQuery();
             sentencia_preparada.close();
@@ -298,7 +299,7 @@ public class metodosBD {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        return respuesta;
+        return respuesta_guardado;
     }
 
     public ArrayList<String[]> consultarSede(int id) {
