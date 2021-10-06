@@ -128,7 +128,7 @@ public class menu_operador extends javax.swing.JFrame {
                     .addComponent(jButton_cobrar)
                     .addComponent(jLabel_cobrar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CONTENIDOLayout.createSequentialGroup()
+            .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton_rastreo)
@@ -149,10 +149,11 @@ public class menu_operador extends javax.swing.JFrame {
                 .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_PICKUP)
                     .addComponent(jButton_cobrar))
-                .addGap(18, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jLabel_rastreo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_rastreo))
+                .addComponent(jButton_rastreo)
+                .addGap(15, 15, 15))
         );
 
         jButton_atras.setText("Cerrar Sesion");

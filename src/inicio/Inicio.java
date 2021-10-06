@@ -46,7 +46,6 @@ public class Inicio extends javax.swing.JFrame {
         jPanel_CONTENIDO = new javax.swing.JPanel();
         jLabel_TITULO1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton_registro = new javax.swing.JButton();
         jButton_login = new javax.swing.JButton();
         jButton_contactenos = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -59,13 +58,6 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel_TITULO1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_TITULO1.setText("¡Tus paquetes al instante!");
-
-        jButton_registro.setText("Registrarme");
-        jButton_registro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_registroActionPerformed(evt);
-            }
-        });
 
         jButton_login.setText("Ya tengo cuenta");
         jButton_login.addActionListener(new java.awt.event.ActionListener() {
@@ -86,31 +78,23 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(12, Short.MAX_VALUE)
-                        .addComponent(jButton_registro)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton_login))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jButton_contactenos)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jButton_contactenos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_login)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_contactenos, jButton_login, jButton_registro});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton_contactenos, jButton_login});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_registro)
-                    .addComponent(jButton_login))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_contactenos)
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(jButton_login)
+                    .addComponent(jButton_contactenos))
+                .addGap(68, 68, 68))
         );
 
         jLabel_TITULO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -201,15 +185,6 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registroActionPerformed
-        // TODO add your handling code here:
-        
-        registro registrar;
-        registrar = new registro(this,true);
-        registrar.setAlwaysOnTop (true);
-        registrar.setVisible(true);
-    }//GEN-LAST:event_jButton_registroActionPerformed
-
     private void jButton_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loginActionPerformed
         login acceso = new login();
         acceso.setVisible(true);
@@ -265,7 +240,6 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_contactenos;
     private javax.swing.JButton jButton_login;
-    private javax.swing.JButton jButton_registro;
     private javax.swing.JLabel jLabel_LOGO;
     private javax.swing.JLabel jLabel_TITULO;
     private javax.swing.JLabel jLabel_TITULO1;
