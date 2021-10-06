@@ -95,7 +95,7 @@ public class metodosBD {
         return respuesta_busqueda;
     }
 
-    private void actualizar_persona(String cedula, String nombre, String celular, String direccion, String apellido1, String apellido2, String correo) {
+    public void actualizar_persona(String cedula, String nombre, String celular, String direccion, String apellido1, String apellido2, String correo) {
         ResultSet respuesta_servidor = null;
         Connection conexion;
 
