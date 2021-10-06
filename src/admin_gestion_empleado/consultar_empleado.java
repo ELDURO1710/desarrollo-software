@@ -33,6 +33,9 @@ public class consultar_empleado extends javax.swing.JDialog {
     /*public void buscar(){
         String cedula = this.txtCedula.getText();
         String texto = metodos.buscar_persona(cedula);
+    public void buscar(){
+        String cedula = this.jTextField_Cedula.getText();
+        String texto = metodos.buscar_persona(cedula)[3];
         JOptionPane.showMessageDialog(this, texto);
     }*/
     
