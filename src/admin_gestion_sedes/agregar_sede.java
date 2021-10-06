@@ -54,7 +54,13 @@ public class agregar_sede extends javax.swing.JDialog {
     metodosBD metodos = new metodosBD();
     
     public void registrar_sede(){
-        metodos.guardar_sede(this.jTextField_ID.getText(), this.jTextField_NOMBRE.getText(), this.jTextField_direccion.getText(), this.jTextField_telefono.getText());
+        if(metodos.guardar_sede(this.jTextField_ID.getText(), this.jTextField_NOMBRE.getText(), this.jTextField_direccion.getText(), this.jTextField_telefono.getText()))
+        {
+            this.jLabel_mensaje.setText("Sede registrada con exito");
+        }
+        else{
+            this.jLabel_mensaje.setText("Algo salio mal");
+        }
     }
     
     

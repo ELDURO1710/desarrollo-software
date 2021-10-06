@@ -51,7 +51,7 @@ public class actualizar_empleado extends javax.swing.JDialog {
     
     public boolean celulares(String cadena){
         boolean respuesta = false;
-        if(this.solonumeros(cadena) && (cadena.length() < 13)){
+        if(this.solonumeros(cadena) && (13 > cadena.length())){
             respuesta=true;
         }
         else{
