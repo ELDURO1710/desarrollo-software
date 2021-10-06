@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package usuario_operador;
-import usuario_operador.menu_operador;
+package empleado_gestion_pickup;
+import modulos.menu_operador;
 
 /**
  *
