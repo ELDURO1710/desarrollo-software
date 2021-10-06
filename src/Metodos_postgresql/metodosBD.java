@@ -300,38 +300,33 @@ public class metodosBD {
         }
         return respuesta;
     }
-    
-    
 
-    public ArrayList<String[]> consultarSede(int id){
+    public ArrayList<String[]> consultarSede(int id) {
         Connection conexion;
         ArrayList<String[]> tabla = new ArrayList<>();
-        String sentencia_guardar= ("SELECT * FROM sedes WHERE id=?");
+        String sentencia_guardar = ("SELECT * FROM sedes WHERE id=?");
         try {
-           conexion = (Connection) ConexionBD.Conectar();
+            conexion = (Connection) ConexionBD.Conectar();
             PreparedStatement sql = conexion.prepareStatement(sentencia_guardar);
-        	sql.setInt(1, id);
-            
-                ResultSet rs = sql.executeQuery();
- 
-            while (rs.next()){
+            sql.setInt(1, id);
+
+            ResultSet rs = sql.executeQuery();
+
+            while (rs.next()) {
                 String[] fila = new String[4];
                 for (int i = 0; i < 4; i++) {
-                    fila[i] = rs.getString(i+1);
+                    fila[i] = rs.getString(i + 1);
                 }
                 tabla.add(fila);
             }
-            
-           
+
         } catch (SQLException ex) {
-            
+
             System.out.println("Error: " + ex.getMessage());
-            
+
         }
         return tabla;
     }
-
-
 
     public ArrayList<String[]> consultarCliente(int id) {
         Connection conexion;
@@ -462,8 +457,8 @@ public class metodosBD {
         }
         return resultado;
     }
-    
-        public ArrayList<String[]> consultarEmpleado(int id){
+
+    public ArrayList<String[]> consultarEmpleado(int id) {
         Connection conexion;
         ArrayList<String[]> tabla = new ArrayList<>();
         String sentencia_guardar = ("SELECT * FROM usr_empleados_activos WHERE id= ?");
@@ -518,6 +513,34 @@ public class metodosBD {
         return tabla;
     }
 
+    public ArrayList<String[]> consultarFactura() {
+        Connection conexion;
+        ArrayList<String[]> tabla = new ArrayList<>();
+        String sentencia_guardar = "SELECT * FROM factura";
+        try {
+            conexion = (Connection) ConexionBD.Conectar();
+            PreparedStatement sql = conexion.prepareStatement(sentencia_guardar);
+            //sql.setString(1, "");
+
+            ResultSet rs = sql.executeQuery();
+            //sql.getResultSet();
+
+            while (rs.next()) {
+                String[] fila = new String[7];
+                for (int i = 0; i < 7; i++) {
+                    fila[i] = rs.getString(i + 1);
+                }
+                tabla.add(fila);
+            }
+
+        } catch (SQLException ex) {
+
+            System.out.println("Error: " + ex.getMessage());
+
+        }
+        return tabla;
+    }
+
 }
 
-//>>>>>>> 07fdc12f9872804bed87344c56707964a731f8eb
+

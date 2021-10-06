@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
 import javax.swing.table.DefaultTableModel;
+import modulos.menu_admin;
 
 /**
  *
@@ -109,8 +110,7 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
         btnBuscar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,7 +157,7 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
 
         comboTables.setBackground(new java.awt.Color(0, 102, 204));
         comboTables.setFont(new java.awt.Font("Segoe UI Light", 0, 10)); // NOI18N
-        comboTables.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Persona", "Item 3", "Item 4" }));
+        comboTables.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Persona", "Factura" }));
         comboTables.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTablesActionPerformed(evt);
@@ -513,7 +513,8 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
                     .addComponent(jLabel29)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 770, 460));
@@ -541,13 +542,14 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dashboard1/Img/icons8_power_off_button_32px.png"))); // NOI18N
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, -1, 40));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("SALIR");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
+        btnRegresar.setBackground(new java.awt.Color(0, 102, 102));
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Regresar.png"))); // NOI18N
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 50, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -565,12 +567,37 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
 
     private void comboTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTablesActionPerformed
         // TODO add your handling code here:
+        int opcion= comboTables.getSelectedIndex();
+        
+        switch(opcion){
+            case 1:
+                tablaPersona mostrar = new tablaPersona();
+                mostrar.setVisible(true);
+                this.setLocationRelativeTo(null);
+                this.dispose();
+                break;
+            case 2:
+                tablaFactura mostrarr = new tablaFactura();
+                mostrarr.setVisible(true);
+                this.setLocationRelativeTo(null);
+                this.dispose();
+               break;
+        }
+      
     }//GEN-LAST:event_comboTablesActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         mostrarPaquetes();
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        
+        menu_admin regresar= new menu_admin();
+        regresar.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -610,14 +637,13 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaPaquetes;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> comboTables;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
