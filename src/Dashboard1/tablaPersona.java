@@ -26,6 +26,7 @@ public class tablaPersona extends javax.swing.JFrame {
     public tablaPersona() {
         initComponents();
         mostrarPersona();
+        this.setLocationRelativeTo(null);
     }
     public void mostrarPersona() {
         
