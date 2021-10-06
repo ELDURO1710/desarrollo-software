@@ -558,7 +558,6 @@ public class metodosBD {
         }
         return tabla;
     }
-    
 
     public int crear_factura(String id_cliente, String medio_de_pago, String valor_a_pagar) {
         ResultSet resultado = null;
@@ -634,6 +633,40 @@ public class metodosBD {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }
+
+    public String[] buscar_paquete(String num_factura) {
+        ResultSet resultado = null;
+        String[] respuesta_busqueda = {"", "", "", "", "", "", "", "", ""};
+        Connection conexion;
+
+        String sentencia_buscar = ("SELECT (peso,  largo,  ancho,  alto,  valor_declarado,  tiempo_de_entrega,  id_factura,  asegurado,  descripcion) FROM paquete WHERE id_factura=(?)");
+
+        try {
+            conexion = (Connection) ConexionBD.Conectar();
+            sentencia_preparada = conexion.prepareStatement(sentencia_buscar);
+            sentencia_preparada.setInt(1, Integer.parseInt(num_factura));
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                respuesta_busqueda[0] = resultado.getArray(1).toString();//
+                respuesta_busqueda[1] = resultado.getArray(2).toString();//
+                respuesta_busqueda[2] = resultado.getArray(3).toString();//
+                respuesta_busqueda[3] = resultado.getArray(4).toString();//
+                respuesta_busqueda[4] = resultado.getArray(5).toString();//
+                respuesta_busqueda[5] = resultado.getArray(6).toString();//
+                respuesta_busqueda[6] = resultado.getArray(7).toString();//
+                respuesta_busqueda[7] = resultado.getArray(8).toString();//
+                respuesta_busqueda[8] = resultado.getArray(9).toString();//
+            } else {
+                respuesta_busqueda = null;
+            }
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return respuesta_busqueda;
     }
 
 }

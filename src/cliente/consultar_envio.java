@@ -19,6 +19,12 @@ public class consultar_envio extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    public boolean asegurado=false;
+    
+    private void buscar_paquete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -341,7 +347,8 @@ public class consultar_envio extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.jLabel_MENSAJE.setText("El paquete se perdió :c");
+        this.buscar_paquete();
+        this.jLabel_mensaje.setText("El paquete se perdió :c");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
@@ -448,4 +455,6 @@ public class consultar_envio extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField_tiempo_de_entrega;
     private javax.swing.JTextField jTextField_valor_declarado;
     // End of variables declaration//GEN-END:variables
+
+    
 }

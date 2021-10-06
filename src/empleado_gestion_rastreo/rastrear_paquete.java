@@ -5,6 +5,10 @@
  */
 package empleado_gestion_rastreo;
 
+import Metodos_postgresql.metodosBD;
+import Metodos_postgresql.metodosBD;
+
+
 /**
  *
  * @author juandiazvillota
@@ -18,6 +22,34 @@ public class rastrear_paquete extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    metodosBD metodos = new metodosBD();
+
+    public boolean asegurado = false;
+
+
+    public void buscar_paquete() {
+        if (this.jTextField_num_factura.getText().isEmpty()) {
+            this.jLabel_mensaje.setText("Error: por favor rellene el numero de factura");
+        } else {
+            if (metodos.buscar_paquete(this.jTextField_num_factura.getText().toString())[0] == null) {
+                this.jLabel_mensaje.setText("Factura no encontrada");
+            } else {
+                String[] resultado_busqueda_paquete = metodos.buscar_paquete(this.jTextField_num_factura.getText().toString());
+                this.jTextField_pesokg.setText(resultado_busqueda_paquete[0]);
+                this.jTextField_largo.setText(resultado_busqueda_paquete[1]);
+                this.jTextField_ancho.setText(resultado_busqueda_paquete[2]);
+                this.jTextField__alto.setText(resultado_busqueda_paquete[3]);
+                this.jTextField_valor_declarado.setText(resultado_busqueda_paquete[4]);
+                this.jTextField_tiempo_de_entrega.setText(resultado_busqueda_paquete[5]);
+                this.jTextField_num_factura.setText(resultado_busqueda_paquete[6]);
+                this.jCheckBox_seguro.setText(resultado_busqueda_paquete[7]);
+                this.jTextField_descripcion.setText(resultado_busqueda_paquete[8]);
+
+                this.jLabel_mensaje.setText("Cedula encontrada");
+            }
+        }
     }
 
     /**
@@ -34,16 +66,30 @@ public class rastrear_paquete extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel_mensaje = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel_descripcion = new javax.swing.JLabel();
+        jLabel_peso = new javax.swing.JLabel();
+        jLabel_dimensiones = new javax.swing.JLabel();
+        jTextField_descripcion = new javax.swing.JTextField();
+        jTextField_ancho = new javax.swing.JTextField();
+        jTextField__alto = new javax.swing.JTextField();
+        jTextField_largo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel_valor_declarado = new javax.swing.JLabel();
+        jTextField_tiempo_de_entrega = new javax.swing.JTextField();
+        jLabel_cantidad = new javax.swing.JLabel();
+        jLabel_valor_declarado1 = new javax.swing.JLabel();
+        jTextField_valor_declarado = new javax.swing.JTextField();
+        jTextField_medio_de_pago = new javax.swing.JTextField();
+        jLabel_valor_declarado2 = new javax.swing.JLabel();
+        jTextField_pesokg = new javax.swing.JTextField();
+        jTextField_cantidad = new javax.swing.JTextField();
+        jCheckBox_seguro = new javax.swing.JCheckBox();
         jPanel_credito = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jRadioButton_visa = new javax.swing.JRadioButton();
-        jRadioButton_mastercard = new javax.swing.JRadioButton();
-        jRadioButton_americanexpress = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
+        jTextField_num_factura = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel_MENSAJE = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,11 +117,11 @@ public class rastrear_paquete extends javax.swing.JDialog {
         jPanel_botonesLayout.setHorizontalGroup(
             jPanel_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_botonesLayout.createSequentialGroup()
-                .addContainerGap(158, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(114, 114, 114)
                 .addComponent(jButton2)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -93,86 +139,200 @@ public class rastrear_paquete extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion del Paquete"));
+
+        jLabel_descripcion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_descripcion.setText("Descripcion Corta (max 100 letras):");
+
+        jLabel_peso.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_peso.setText("Peso (Kg):");
+
+        jLabel_dimensiones.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_dimensiones.setText("Dimensiones:");
+
+        jTextField_ancho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_anchoActionPerformed(evt);
+            }
+        });
+
+        jTextField__alto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField__altoActionPerformed(evt);
+            }
+        });
+
+        jTextField_largo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_largoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("x");
+
+        jLabel2.setText("x");
+
+        jLabel_valor_declarado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_valor_declarado.setText("Tiempo de entrega aprox:");
+
+        jTextField_tiempo_de_entrega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_tiempo_de_entregaActionPerformed(evt);
+            }
+        });
+
+        jLabel_cantidad.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_cantidad.setText("Cantidad:");
+
+        jLabel_valor_declarado1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_valor_declarado1.setText("Valor Declarado:");
+
+        jLabel_valor_declarado2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_valor_declarado2.setText("Medio de pago:");
+
+        jTextField_pesokg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_pesokgActionPerformed(evt);
+            }
+        });
+
+        jCheckBox_seguro.setText("Incluir seguro");
+        jCheckBox_seguro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_seguroActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel_descripcion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_descripcion))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel_dimensiones, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                            .addComponent(jLabel_peso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(5, 5, 5)
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addComponent(jTextField_pesokg, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addComponent(jTextField__alto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField_ancho, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField_largo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jTextField_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jCheckBox_seguro)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jLabel_valor_declarado)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField_tiempo_de_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jLabel_valor_declarado1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jTextField_valor_declarado, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_valor_declarado2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_medio_de_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_descripcion)
+                    .addComponent(jTextField_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_peso)
+                    .addComponent(jLabel_cantidad)
+                    .addComponent(jTextField_pesokg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_dimensiones)
+                    .addComponent(jTextField_ancho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField__alto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_largo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jCheckBox_seguro))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField_valor_declarado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_valor_declarado1))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_valor_declarado)
+                        .addComponent(jTextField_tiempo_de_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_medio_de_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_valor_declarado2))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
         jPanel_credito.setBorder(javax.swing.BorderFactory.createTitledBorder("Tracking"));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("buscar por");
-
-        jRadioButton_visa.setText("No. Tracking");
-
-        jRadioButton_mastercard.setText("Cedula");
-
-        jRadioButton_americanexpress.setText("Celular");
-
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Número");
+        jLabel4.setText("Número de factura");
 
-        jTextField20.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_num_factura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField20ActionPerformed(evt);
+                jTextField_num_facturaActionPerformed(evt);
             }
         });
 
         jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel51.setText("$");
 
         javax.swing.GroupLayout jPanel_creditoLayout = new javax.swing.GroupLayout(jPanel_credito);
         jPanel_credito.setLayout(jPanel_creditoLayout);
         jPanel_creditoLayout.setHorizontalGroup(
             jPanel_creditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_creditoLayout.createSequentialGroup()
-                .addGroup(jPanel_creditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton_americanexpress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton_visa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton_mastercard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel_creditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                     .addGroup(jPanel_creditoLayout.createSequentialGroup()
                         .addComponent(jLabel51)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField20)))
-                .addGap(17, 17, 17))
+                        .addComponent(jTextField_num_factura)))
+                .addGap(0, 0, 0))
         );
         jPanel_creditoLayout.setVerticalGroup(
             jPanel_creditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_creditoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_creditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_creditoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton_visa)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_num_factura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel51))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton_mastercard)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton_americanexpress)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("log"));
-
-        jLabel_MENSAJE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_MENSAJE, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_MENSAJE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,16 +340,14 @@ public class rastrear_paquete extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(TITULO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel_botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel_credito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -197,11 +355,11 @@ public class rastrear_paquete extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(TITULO)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel_credito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_credito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel_botones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -214,12 +372,37 @@ public class rastrear_paquete extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.jLabel_MENSAJE.setText("El paquete se perdió :c");
+        this.buscar_paquete();
+        this.jLabel_mensaje.setText("El paquete se perdió :c");
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
+    private void jTextField_num_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_num_facturaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField20ActionPerformed
+    }//GEN-LAST:event_jTextField_num_facturaActionPerformed
+
+    private void jTextField_anchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_anchoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_anchoActionPerformed
+
+    private void jTextField__altoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField__altoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField__altoActionPerformed
+
+    private void jTextField_largoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_largoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_largoActionPerformed
+
+    private void jTextField_tiempo_de_entregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_tiempo_de_entregaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_tiempo_de_entregaActionPerformed
+
+    private void jTextField_pesokgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_pesokgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_pesokgActionPerformed
+
+    private void jCheckBox_seguroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_seguroActionPerformed
+        this.asegurado = true;// TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox_seguroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,17 +450,31 @@ public class rastrear_paquete extends javax.swing.JDialog {
     private javax.swing.JLabel TITULO;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JCheckBox jCheckBox_seguro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel_MENSAJE;
+    private javax.swing.JLabel jLabel_cantidad;
+    private javax.swing.JLabel jLabel_descripcion;
+    private javax.swing.JLabel jLabel_dimensiones;
     private javax.swing.JLabel jLabel_mensaje;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel_peso;
+    private javax.swing.JLabel jLabel_valor_declarado;
+    private javax.swing.JLabel jLabel_valor_declarado1;
+    private javax.swing.JLabel jLabel_valor_declarado2;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel_botones;
     private javax.swing.JPanel jPanel_credito;
-    private javax.swing.JRadioButton jRadioButton_americanexpress;
-    private javax.swing.JRadioButton jRadioButton_mastercard;
-    private javax.swing.JRadioButton jRadioButton_visa;
-    private javax.swing.JTextField jTextField20;
+    private javax.swing.JTextField jTextField__alto;
+    private javax.swing.JTextField jTextField_ancho;
+    private javax.swing.JTextField jTextField_cantidad;
+    private javax.swing.JTextField jTextField_descripcion;
+    private javax.swing.JTextField jTextField_largo;
+    private javax.swing.JTextField jTextField_medio_de_pago;
+    private javax.swing.JTextField jTextField_num_factura;
+    private javax.swing.JTextField jTextField_pesokg;
+    private javax.swing.JTextField jTextField_tiempo_de_entrega;
+    private javax.swing.JTextField jTextField_valor_declarado;
     // End of variables declaration//GEN-END:variables
 }
