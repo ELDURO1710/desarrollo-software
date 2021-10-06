@@ -5,6 +5,7 @@
  */
 package modulos;
 
+import Dashboard1.Dashboard;
 import admin_gestion_cliente.gestion_de_cliente;
 import admin_gestion_empleado.gestion_de_empleado;
 import admin_gestion_sedes.gestion_de_sedes;
@@ -48,6 +49,14 @@ public class menu_admin extends javax.swing.JFrame {
         ImageIcon imagen_sede = new ImageIcon(imgsede);
         this.jLabel_GESTION_SEDES.setIcon(imagen_sede);
         this.jLabel_GESTION_SEDES.setText("");
+        
+        ImageIcon imagendashboard = new ImageIcon("src/imagenes/DashBoard.png");
+        Image dash =imagendashboard.getImage();
+        Image imgdash = dash.getScaledInstance(80, 80,Image.SCALE_SMOOTH);
+        ImageIcon imagen_dash = new ImageIcon(imgdash);
+        this.JLabelDash.setIcon(imagen_dash);
+        this.JLabelDash.setText("");
+        
     }
     
     /**
@@ -68,6 +77,8 @@ public class menu_admin extends javax.swing.JFrame {
         jButton_GESTION_SEDES = new javax.swing.JButton();
         jButton_getsion_empleado = new javax.swing.JButton();
         jLabel_Usuarios = new javax.swing.JLabel();
+        DASHBOARD = new javax.swing.JButton();
+        JLabelDash = new javax.swing.JLabel();
         jButton_atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,6 +119,21 @@ public class menu_admin extends javax.swing.JFrame {
         jLabel_Usuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Usuarios.setText("USUARIOS");
 
+        DASHBOARD.setText("DashBoard");
+        DASHBOARD.setMaximumSize(new java.awt.Dimension(111, 23));
+        DASHBOARD.setMinimumSize(new java.awt.Dimension(111, 23));
+        DASHBOARD.setPreferredSize(new java.awt.Dimension(111, 23));
+        DASHBOARD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DASHBOARDActionPerformed(evt);
+            }
+        });
+
+        JLabelDash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabelDash.setText("Dash");
+        JLabelDash.setMaximumSize(new java.awt.Dimension(31, 14));
+        JLabelDash.setMinimumSize(new java.awt.Dimension(31, 14));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,14 +143,20 @@ public class menu_admin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_GESTION_USUARIOS)
                     .addComponent(jLabel_Usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_getsion_empleado)
-                    .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton_GESTION_SEDES)
-                    .addComponent(jLabel_GESTION_SEDES, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton_GESTION_SEDES)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DASHBOARD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_GESTION_SEDES, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JLabelDash, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -137,12 +169,14 @@ public class menu_admin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_GESTION_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_GESTION_SEDES)
-                    .addComponent(jLabel_Usuarios))
+                    .addComponent(jLabel_Usuarios)
+                    .addComponent(JLabelDash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_GESTION_USUARIOS)
                     .addComponent(jButton_GESTION_SEDES)
-                    .addComponent(jButton_getsion_empleado))
+                    .addComponent(jButton_getsion_empleado)
+                    .addComponent(DASHBOARD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -150,20 +184,22 @@ public class menu_admin extends javax.swing.JFrame {
         jPanel_CONTENIDO.setLayout(jPanel_CONTENIDOLayout);
         jPanel_CONTENIDOLayout.setHorizontalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_TITULO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CONTENIDOLayout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGroup(jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_TITULO, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                    .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(101, 101, 101))
         );
         jPanel_CONTENIDOLayout.setVerticalGroup(
             jPanel_CONTENIDOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_CONTENIDOLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_TITULO, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jButton_atras.setText("Cerrar Sesion");
@@ -179,10 +215,12 @@ public class menu_admin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_atras)
-                    .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton_atras)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,33 +229,26 @@ public class menu_admin extends javax.swing.JFrame {
                 .addComponent(jButton_atras)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel_CONTENIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton_GESTION_USUARIOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_USUARIOSActionPerformed
-        gestion_de_cliente admin_usr;
-        admin_usr = new gestion_de_cliente();
-        admin_usr.setAlwaysOnTop (true);
-        admin_usr.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton_GESTION_USUARIOSActionPerformed
-
-    private void jButton_GESTION_SEDESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_SEDESActionPerformed
-        gestion_de_sedes admin_sede;
-        admin_sede = new gestion_de_sedes();
-        admin_sede.setAlwaysOnTop (true);
-        admin_sede.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton_GESTION_SEDESActionPerformed
 
     private void jButton_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atrasActionPerformed
         Inicio log = new Inicio();
         log.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton_atrasActionPerformed
+
+    private void DASHBOARDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DASHBOARDActionPerformed
+        // TODO add your handling code here:
+        Dashboard dash;
+        dash = new Dashboard();
+        dash.setAlwaysOnTop(true);
+        dash.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_DASHBOARDActionPerformed
 
     private void jButton_getsion_empleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_getsion_empleadoActionPerformed
         // TODO add your handling code here:
@@ -227,6 +258,22 @@ public class menu_admin extends javax.swing.JFrame {
         admin_usr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton_getsion_empleadoActionPerformed
+
+    private void jButton_GESTION_SEDESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_SEDESActionPerformed
+        gestion_de_sedes admin_sede;
+        admin_sede = new gestion_de_sedes();
+        admin_sede.setAlwaysOnTop (true);
+        admin_sede.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton_GESTION_SEDESActionPerformed
+
+    private void jButton_GESTION_USUARIOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_USUARIOSActionPerformed
+        gestion_de_cliente admin_usr;
+        admin_usr = new gestion_de_cliente();
+        admin_usr.setAlwaysOnTop (true);
+        admin_usr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton_GESTION_USUARIOSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +311,8 @@ public class menu_admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DASHBOARD;
+    private javax.swing.JLabel JLabelDash;
     private javax.swing.JButton jButton_GESTION_SEDES;
     private javax.swing.JButton jButton_GESTION_USUARIOS;
     private javax.swing.JButton jButton_atras;

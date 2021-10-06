@@ -45,13 +45,14 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
             String[] row = lista.get(i);
             Object[] fila = new Object[]{row[0], row[1], row[2], row[3], row[4], row[5], row[6]};
             paquetes.add(new Paquete(Integer.parseInt(row[0]), // id
-                    Integer.parseInt(row[1]), // nombre
-                    row[2], // celular 
-                    row[3], //apellido1
-                    row[4], //apellido2
-                    row[5], Boolean.getBoolean(row[6])
-            //direccion
-            )); // correo
+                                      Integer.parseInt(row[1]), // nombre
+                                      row[2], // celular 
+                                      row[3], //apellido1
+                                      row[4], //apellido2
+                                      row[5], //direccion 
+                                      Boolean.getBoolean(row[6]) //correo
+                                      ));
+
             modeloDatos.addRow(fila);
             
         }
