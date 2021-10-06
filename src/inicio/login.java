@@ -6,7 +6,7 @@
 package inicio;
 
 import Metodos_postgresql.*;
-import cliente.menu_cliente;
+import modulos.menu_cliente;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.sql.*;
