@@ -360,6 +360,35 @@ public class metodosBD {
         }
         return tabla;
     }
+
+    public ArrayList<String[]> consultarPersonas() {
+        Connection conexion;
+        ArrayList<String[]> tabla = new ArrayList<>();
+        String sentencia_guardar = "SELECT * FROM persona";
+        try {
+            conexion = (Connection) ConexionBD.Conectar();
+            PreparedStatement sql = conexion.prepareStatement(sentencia_guardar);
+            //sql.setString(1, "");
+
+            ResultSet rs = sql.executeQuery();
+            //sql.getResultSet();
+
+            while (rs.next()) {
+                String[] fila = new String[7];
+                for (int i = 0; i < 7; i++) {
+                    fila[i] = rs.getString(i + 1);
+                }
+                tabla.add(fila);
+            }
+
+        } catch (SQLException ex) {
+
+            System.out.println("Error: " + ex.getMessage());
+
+        }
+        return tabla;
+    }
+
 }
 
 //>>>>>>> 07fdc12f9872804bed87344c56707964a731f8eb

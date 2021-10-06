@@ -5,19 +5,53 @@
  */
 package Dashboard1;
 
+import Dashboard1.Entidades.Paquete;
+import Dashboard1.Entidades.Persona;
+import Metodos_postgresql.metodosBD;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author DANILO
  */
 public class tablaPersona extends javax.swing.JFrame {
 
+    private List<Persona> personas;
+    metodosBD metodos = new metodosBD();
     /**
      * Creates new form tbPersona
      */
     public tablaPersona() {
         initComponents();
+        mostrarPersona();
     }
-
+    public void mostrarPersona() {
+        
+        DefaultTableModel modeloDatos = (DefaultTableModel) tablaPersona.getModel();
+        
+        while (modeloDatos.getRowCount() > 0) {
+            modeloDatos.removeRow(modeloDatos.getRowCount() - 1);
+        }
+        List<String[]> lista = metodos.consultarPersonas();
+        this.personas = new ArrayList<>();
+        
+        for (int i = 0; i < lista.size(); i++) {
+            String[] row = lista.get(i);
+            Object[] fila = new Object[]{row[0], row[1], row[2], row[3], row[4], row[5], row[6]};
+            personas.add(new Persona(Integer.parseInt(row[0]), // id
+                    row[1], // nombre
+                    row[2], // celular 
+                    row[3], //apellido1
+                    row[4], //apellido2
+                    row[5], row[6])
+            //direccion
+            ); // correo
+            modeloDatos.addRow(fila);
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,49 +62,44 @@ public class tablaPersona extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TbPersona = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaPersona = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TbPersona.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "NOMBRE", "CELULAR", "DIRECCIÓN", "APELLIDO 1", "APELLIDO 2"
+                "Id", "Nombre", "Celular", "Direccion", "Apellido 1", "Apellido 2", "Correo"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(TbPersona);
+        ));
+        jScrollPane2.setViewportView(tablaPersona);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -104,17 +133,23 @@ public class tablaPersona extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new tablaPersona().setVisible(true);
-            }
-        });
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater ( new Runnable() {
+            
+
+    
+
+    public void run() {
+        new tablaPersona().setVisible(true);
+    }
+}
+);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TbPersona;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaPersona;
     // End of variables declaration//GEN-END:variables
 }

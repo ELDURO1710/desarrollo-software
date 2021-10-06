@@ -18,29 +18,31 @@ import javax.swing.table.DefaultTableModel;
  * @author DANILO
  */
 public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
+
     private List<Paquete> paquetes;
     metodosBD metodos = new metodosBD();
+
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
         this.setLocationRelativeTo(null);
-       // mostrarPaquetes();
+        // mostrarPaquetes();
     }
     
-            public void mostrarPaquetes(){
+    public void mostrarPaquetes() {
         
-        DefaultTableModel modeloDatos = (DefaultTableModel)TablaPaquetes.getModel();
+        DefaultTableModel modeloDatos = (DefaultTableModel) TablaPaquetes.getModel();
         
         while (modeloDatos.getRowCount() > 0) {
-            modeloDatos.removeRow(modeloDatos.getRowCount()-1);
+            modeloDatos.removeRow(modeloDatos.getRowCount() - 1);
         }
         List<String[]> lista = metodos.consultarPaquetes();
         this.paquetes = new ArrayList<>();
         
         for (int i = 0; i < lista.size(); i++) {
-            String[] row =  lista.get(i);
+            String[] row = lista.get(i);
             Object[] fila = new Object[]{row[0], row[1], row[2], row[3], row[4], row[5], row[6]};
             paquetes.add(new Paquete(Integer.parseInt(row[0]), // id
                                       Integer.parseInt(row[1]), // nombre
@@ -50,8 +52,9 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
                                       row[5], //direccion 
                                       Boolean.getBoolean(row[6]) //correo
                                       ));
+
             modeloDatos.addRow(fila);
-    
+            
         }
     }
 
