@@ -245,7 +245,7 @@ public class menu_admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         Dashboard dash;
         dash = new Dashboard();
-        dash.setAlwaysOnTop(true);
+        //dash.setAlwaysOnTop(true);
         dash.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_DASHBOARDActionPerformed
@@ -254,7 +254,7 @@ public class menu_admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         gestion_de_empleado admin_usr;
         admin_usr = new gestion_de_empleado();
-        admin_usr.setAlwaysOnTop (true);
+        //admin_usr.setAlwaysOnTop (true);
         admin_usr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton_getsion_empleadoActionPerformed
@@ -262,7 +262,7 @@ public class menu_admin extends javax.swing.JFrame {
     private void jButton_GESTION_SEDESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_SEDESActionPerformed
         gestion_de_sedes admin_sede;
         admin_sede = new gestion_de_sedes();
-        admin_sede.setAlwaysOnTop (true);
+        //admin_sede.setAlwaysOnTop (true);
         admin_sede.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton_GESTION_SEDESActionPerformed
@@ -270,7 +270,7 @@ public class menu_admin extends javax.swing.JFrame {
     private void jButton_GESTION_USUARIOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GESTION_USUARIOSActionPerformed
         gestion_de_cliente admin_usr;
         admin_usr = new gestion_de_cliente();
-        admin_usr.setAlwaysOnTop (true);
+        //admin_usr.setAlwaysOnTop (true);
         admin_usr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton_GESTION_USUARIOSActionPerformed
