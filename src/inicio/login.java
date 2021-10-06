@@ -56,7 +56,7 @@ public class login extends javax.swing.JFrame {
     public void ingresar(){
         String usuario = this.jTextField_ID.getText();
         int user=Integer.valueOf(usuario);
-        String pass = this.jTextField_contrasena.getText();
+        String pass = this.JPassword.getText();
         
         if(solonumeros(this.jTextField_ID.getText())){
             switch (metodos.buscar_personal(pass, user)){
@@ -108,7 +108,7 @@ public class login extends javax.swing.JFrame {
         jButton_Recuperarcontrasena = new javax.swing.JButton();
         jButton__atras = new javax.swing.JButton();
         jLabel_mensaje = new javax.swing.JLabel();
-        jTextField_contrasena = new javax.swing.JTextField();
+        JPassword = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel_TITULO = new javax.swing.JLabel();
@@ -175,7 +175,7 @@ public class login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_ID, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(jTextField_contrasena))
+                    .addComponent(JPassword))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,7 +196,7 @@ public class login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_password)
-                    .addComponent(jTextField_contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_ingresar)
@@ -359,6 +359,7 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField JPassword;
     private javax.swing.JButton jButton_Recuperarcontrasena;
     private javax.swing.JButton jButton__atras;
     private javax.swing.JButton jButton_ingresar;
@@ -373,6 +374,5 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel_CONTENIDO;
     private javax.swing.JTextField jTextField_ID;
-    private javax.swing.JTextField jTextField_contrasena;
     // End of variables declaration//GEN-END:variables
 }
