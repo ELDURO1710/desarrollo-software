@@ -30,30 +30,28 @@ public class login extends javax.swing.JFrame {
         this.setAlwaysOnTop(true);
         imagenes();
     }
-    
-    
-    
-    public void imagenes(){
+
+    public void imagenes() {
         ImageIcon imagencaja = new ImageIcon("src/imagenes/caja.png");
         Image logo = imagencaja.getImage();
-        Image imgcaja = logo.getScaledInstance(80,80, Image.SCALE_SMOOTH);
+        Image imgcaja = logo.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon imagen_caja = new ImageIcon(imgcaja);
         this.jLabel_LOGO.setIcon(imagen_caja);
         this.jLabel_LOGO.setText("");
     }
-    
-    public boolean solonumeros(String cadena){
-        try{
+
+    public boolean solonumeros(String cadena) {
+        try {
             Integer.parseInt(cadena);
             return true;
-        } catch (NumberFormatException x){
+        } catch (NumberFormatException x) {
             return false;
         }
     }
-    
+
     metodosBD metodos = new metodosBD();
-    
-    public void ingresar(){
+
+    public void ingresar() {
         String usuario = this.jTextField_ID.getText();
         int user=Integer.valueOf(usuario);
         String pass = this.JPassword.getText();
@@ -65,6 +63,8 @@ public class login extends javax.swing.JFrame {
                     break;
                 case 1:
                     this.jLabel_mensaje.setText("Bienvenido a Easy eComerce!");//cliente
+                    metodos.set_sesion(this.jTextField_ID.getText());
+                    System.out.println(metodos.get_sesion());
                     menu_cliente cliente;
                     cliente = new menu_cliente();
                     cliente.setVisible(true);
@@ -72,6 +72,9 @@ public class login extends javax.swing.JFrame {
                     break;
                 case 2:
                     this.jLabel_mensaje.setText("Acceso Empleados");//empleados
+                    metodos.set_sesion(this.jTextField_ID.getText());
+                    System.out.println(metodos.get_sesion());
+
                     menu_operador empleado;
                     empleado = new menu_operador();
                     empleado.setVisible(true);
@@ -79,6 +82,8 @@ public class login extends javax.swing.JFrame {
                     break;
                 case 3:
                     this.jLabel_mensaje.setText("Acceso Administrador");//administradores
+                    metodos.set_sesion(this.jTextField_ID.getText());            
+                    System.out.println(metodos.get_sesion());
                     menu_admin admin;
                     admin = new menu_admin();
                     admin.setVisible(true);
@@ -311,9 +316,9 @@ public class login extends javax.swing.JFrame {
 
     private void jButton_RecuperarcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RecuperarcontrasenaActionPerformed
         recupera recuperacion;
-        recuperacion = new recupera(this,true);
-        recuperacion.setAlwaysOnTop (true);
-        recuperacion.setVisible(true);   
+        recuperacion = new recupera(this, true);
+        recuperacion.setAlwaysOnTop(true);
+        recuperacion.setVisible(true);
     }//GEN-LAST:event_jButton_RecuperarcontrasenaActionPerformed
 
     private void jButton__atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton__atrasActionPerformed

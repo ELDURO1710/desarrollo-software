@@ -10,9 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +31,7 @@ public class metodosBD {
     public static ResultSet resultado;
     public static String sql;
     public static int resultado_numero = 0;
+    public static String sesion_login = "nulo";
 
     //================================================================================================================================================================
     //GESTION DE PERSONAS
@@ -34,7 +40,7 @@ public class metodosBD {
         int resultado = 0;
         Connection conexion;
 
-        String sentencia_guardar = ("INSERT INTO persona (id,nombre,celular,direccion,apellido1,apellido2,correo) VALUES  (?,?,?,?,?,?,?)");
+        String sentencia_guardar = ("INSERT INTO persona (id_persona,nombre,celular,direccion,apellido1,apellido2,correo) VALUES  (?,?,?,?,?,?,?)");
 
         try {
             conexion = (Connection) ConexionBD.Conectar();
@@ -62,7 +68,7 @@ public class metodosBD {
         String[] respuesta_busqueda = {"", "", "", "", "", "", ""};
         Connection conexion;
 
-        String sentencia_buscar = ("SELECT * FROM persona WHERE id=(?)");
+        String sentencia_buscar = ("SELECT * FROM persona WHERE id_persona=(?)");
 
         try {
             conexion = (Connection) ConexionBD.Conectar();
@@ -93,7 +99,7 @@ public class metodosBD {
         ResultSet respuesta_servidor = null;
         Connection conexion;
 
-        String sentencia_update = ("UPDATE persona SET id=(?),nombre=(?),celular=(?),direccion=(?),apellido1=(?),apellido2=(?),correo=(?) WHERE id=(?)");
+        String sentencia_update = ("UPDATE persona SET id_persona=(?),nombre=(?),celular=(?),direccion=(?),apellido1=(?),apellido2=(?),correo=(?) WHERE id_persona=(?)");
 
         try {
             conexion = (Connection) ConexionBD.Conectar();
@@ -120,7 +126,7 @@ public class metodosBD {
         Connection conexion;
         int resultado = 0;
 
-        String sentencia_inactivar = ("DELETE FROM persona WHERE id=(?)");
+        String sentencia_inactivar = ("DELETE FROM persona WHERE id_persona=(?)");
 
         try {
             conexion = (Connection) ConexionBD.Conectar();
@@ -167,6 +173,14 @@ public class metodosBD {
         }
 
         return resultadito;
+    }
+
+    public void set_sesion(String ID) {
+        sesion_login = ID;
+    }
+
+    public String get_sesion() {
+        return sesion_login;
     }
 
     public String[] buscar_empleado(String cedula) {
@@ -279,10 +293,10 @@ public class metodosBD {
     //Metodos de las sedes
     public Boolean guardar_sede(String ID, String nombres, String direccion, String telefono) {
         ResultSet respuesta_servidor = null;
-        Boolean respuesta_guardado =false;
+        Boolean respuesta_guardado = false;
         Connection conexion;
 
-        String sentencia_guardar = ("INSERT INTO sedes (id,nombre, direccion, telefono) VALUES  (?,?,?,?)");
+        String sentencia_guardar = ("INSERT INTO sedes (id_sede,nombre, direccion, telefono) VALUES  (?,?,?,?)");
 
         try {
             conexion = (Connection) ConexionBD.Conectar();
@@ -291,7 +305,7 @@ public class metodosBD {
             sentencia_preparada.setString(2, nombres);
             sentencia_preparada.setString(3, direccion);
             sentencia_preparada.setString(4, telefono);
-            respuesta_guardado=true;
+            respuesta_guardado = true;
 
             respuesta_servidor = sentencia_preparada.executeQuery();
             sentencia_preparada.close();
@@ -305,7 +319,7 @@ public class metodosBD {
     public ArrayList<String[]> consultarSede(int id) {
         Connection conexion;
         ArrayList<String[]> tabla = new ArrayList<>();
-        String sentencia_guardar = ("SELECT * FROM sedes WHERE id=?");
+        String sentencia_guardar = ("SELECT * FROM sedes WHERE id_sede=?");
         try {
             conexion = (Connection) ConexionBD.Conectar();
             PreparedStatement sql = conexion.prepareStatement(sentencia_guardar);
@@ -514,6 +528,9 @@ public class metodosBD {
         return tabla;
     }
 
+    //================================================================================================================================================================
+    //GESTION DE FACTURA
+    //================================================================================================================================================================
     public ArrayList<String[]> consultarFactura() {
         Connection conexion;
         ArrayList<String[]> tabla = new ArrayList<>();
@@ -543,6 +560,80 @@ public class metodosBD {
     }
     
 
+    public int crear_factura(String id_cliente, String medio_de_pago, String valor_a_pagar) {
+        ResultSet resultado = null;
+        int respuesta_funcion = 0;
+        Connection conexion;
+
+        String sentencia_guardar = ("INSERT INTO factura (id_cliente,medio_de_pago,valor_a_pagar,id_empleado) VALUES  (?,?,?,?)");
+
+        try {
+            conexion = (Connection) ConexionBD.Conectar();
+            sentencia_preparada = conexion.prepareStatement(sentencia_guardar);
+            sentencia_preparada.setInt(1, Integer.parseInt(id_cliente));
+            sentencia_preparada.setInt(2, Integer.parseInt(medio_de_pago));
+            sentencia_preparada.setInt(3, Integer.parseInt(valor_a_pagar));
+            sentencia_preparada.setInt(4, Integer.parseInt(sesion_login));
+
+            resultado = sentencia_preparada.executeQuery();
+            resultado.next();
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        String sentencia_buscar_factura = ("SELECT num_factura FROM factura ORDER BY num_factura DESC LIMIT 1");
+
+        try {
+            conexion = (Connection) ConexionBD.Conectar();
+            sentencia_preparada = conexion.prepareStatement(sentencia_buscar_factura);
+            sentencia_preparada.setInt(1, Integer.parseInt(sesion_login));
+
+            resultado = sentencia_preparada.executeQuery();
+            resultado.next();
+            respuesta_funcion = resultado.getInt(1);
+            System.out.println("el numero de factura es " + respuesta_funcion);
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return respuesta_funcion;
+    }
+
+    public void agregar_paquete(String peso, String largo, String ancho, String alto, String valor_declarado, int tiempo_de_entrega, String desde, String hacia, int id_factura, boolean asegurado, String descripcion, String id_remitente, String id_destinatario) {
+        ResultSet resultado = null;
+        int respuesta_funcion = 0;
+        Connection conexion;
+
+        String sentencia_agregar_paquete = ("INSERT INTO paquete (peso,largo,ancho,alto,valor_declarado,tiempo_de_entrega,desde,hacia,id_factura,asegurado,descripcion,id_remitente,id_destinatario) VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        System.out.println("query insertar paquete");
+
+        try {
+            conexion = (Connection) ConexionBD.Conectar();
+            sentencia_preparada = conexion.prepareStatement(sentencia_agregar_paquete);
+            sentencia_preparada.setInt(1, Integer.parseInt(peso));
+            sentencia_preparada.setInt(2, Integer.parseInt(largo));
+            sentencia_preparada.setInt(3, Integer.parseInt(ancho));
+            sentencia_preparada.setInt(4, Integer.parseInt(alto));
+            sentencia_preparada.setInt(5, Integer.parseInt(valor_declarado));
+            sentencia_preparada.setInt(6, tiempo_de_entrega);
+            sentencia_preparada.setString(7, desde);
+            sentencia_preparada.setString(8, hacia);
+            sentencia_preparada.setInt(9, id_factura);
+            sentencia_preparada.setBoolean(10, asegurado);
+            sentencia_preparada.setString(11, descripcion);
+            sentencia_preparada.setInt(12, Integer.parseInt(id_remitente));
+            sentencia_preparada.setInt(13, Integer.parseInt(id_destinatario));
+
+            resultado = sentencia_preparada.executeQuery();
+            resultado.next();
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
 }
-
-

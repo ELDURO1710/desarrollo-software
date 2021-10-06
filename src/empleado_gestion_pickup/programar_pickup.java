@@ -6,7 +6,11 @@
 package empleado_gestion_pickup;
 
 import Metodos_postgresql.metodosBD;
+import java.time.LocalDate;
+import java.util.Date;
 import modulos.menu_operador;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -24,7 +28,10 @@ public class programar_pickup extends javax.swing.JDialog {
     }
 
     metodosBD metodos = new metodosBD();
+
     public Boolean permitido = false;
+    
+    public boolean asegurado = false;
 
     public boolean solonumeros(String cadena) {
         boolean respuesta = false;
@@ -36,6 +43,8 @@ public class programar_pickup extends javax.swing.JDialog {
         }
         return respuesta;
     }
+
+    public Boolean permitido_remitente = false;
 
     public void autofill_remitente() {
         if (this.jTextField_cedula_remitente.getText().isEmpty()) {
@@ -55,11 +64,13 @@ public class programar_pickup extends javax.swing.JDialog {
 
                 this.jLabel_mensaje.setText("Remitente encontrado");
                 if (!(jTextField_nombre_destinatario == null) && !(jTextField_nombre_remitente == null)) {
-                    permitido = true;
+                    permitido_remitente = true;
                 }
             }
         }
     }
+
+    public Boolean permitido_destinatario = false;
 
     public void autofill_destinatario() {
         if (this.jTextField_cedula_destinatario.getText().isEmpty()) {
@@ -79,36 +90,54 @@ public class programar_pickup extends javax.swing.JDialog {
 
                 this.jLabel_mensaje.setText("Destinatario encontrado");
                 if (!(jTextField_nombre_destinatario == null) && !(jTextField_nombre_remitente == null)) {
-                    permitido = true;
+                    permitido_destinatario = true;
                 }
             }
         }
     }
 
     public String generar_factura() {
-        String texto = "";
-        if (this.jTextField_cedula_remitente.getText().isEmpty()) {
+        String num_factura = "";
+        if (this.jTextField_cedula_remitente.getText().isEmpty() || this.jTextField_cedula_destinatario.getText().isEmpty()) {
             this.jLabel_mensaje.setText("Error: por favor rellene los campos auto-fill");
         } else {
             if (metodos.buscar_persona(this.jTextField_cedula_destinatario.getText().toString()) == null) {
                 this.jLabel_mensaje.setText("Destinatario no encontrado, por favor registrelo");
             } else {
-                String[] resultado_busqueda_destinatario = metodos.buscar_persona(this.jTextField_cedula_destinatario.getText().toString());
-                this.jTextField_cedula_destinatario.setText(resultado_busqueda_destinatario[0]);
-                this.jTextField_nombre_destinatario.setText(resultado_busqueda_destinatario[1]);
-                this.jTextField_celular_destinatario.setText(resultado_busqueda_destinatario[2]);
-                this.jTextField_direccion_destinatario.setText(resultado_busqueda_destinatario[3]);
-                this.jTextField_apellido1_destinatario.setText(resultado_busqueda_destinatario[4]);
-                this.jTextField_apellido2_destinatario.setText(resultado_busqueda_destinatario[5]);
-                this.jTextField_correo_destinatario.setText(resultado_busqueda_destinatario[6]);
+                if (metodos.buscar_persona(this.jTextField_cedula_remitente.getText().toString()) == null) {
+                    this.jLabel_mensaje.setText("remitente no encontrado, por favor registrelo");
+                } else {
 
-                this.jLabel_mensaje.setText("Destinatario encontrado");
-                if (!(jTextField_nombre_destinatario == null) && !(jTextField_nombre_remitente == null)) {
-                    permitido = true;
+                    String cedula_cliente = this.jTextField_cedula_remitente.getText();
+                    String medio_de_pago = this.jTextField_medio_de_pago.getText();
+                    String valor_a_pagar = this.jTextField_valor_declarado.getText();
+                    String peso = this.jTextField_pesokg.getText();
+                    String largo = this.jTextField_largo.getText();
+                    String ancho = this.jTextField_ancho.getText();
+                    String alto = this.jTextField__alto.getText();
+                    String valor_declarado = this.jTextField_valor_declarado.getText();
+                    int tiempo_de_entrega = Integer.parseInt(this.jTextField_tiempo_de_entrega.getText());
+                    String desde = this.jTextField_direccion_remitente.getText();
+                    String hacia = this.jTextField_direccion_destinatario.getText();
+                    String descripcion = this.jTextField_descripcion.getText();
+                    String id_remitente = this.jTextField_cedula_remitente.getText();
+                    String id_destinatario = this.jTextField_cedula_destinatario.getText();
+                    
+
+                    if (permitido_destinatario && permitido_remitente) {
+                        int id_factura = metodos.crear_factura(cedula_cliente, medio_de_pago, valor_a_pagar);
+                        num_factura += id_factura;
+                        System.out.println(num_factura);
+
+                        metodos.agregar_paquete(peso,largo,ancho,alto,valor_declarado,tiempo_de_entrega,desde,hacia,id_factura,asegurado,descripcion,id_remitente,id_destinatario);
+                        this.jLabel_mensaje.setText("el id de la factura es " + id_factura);
+                    } else {
+                        this.jLabel_mensaje.setText("Error: busque a los usuarios con el boton auto-fill");
+                    }
                 }
             }
         }
-        return texto;
+        return num_factura;
     }
 
     /**
@@ -160,19 +189,21 @@ public class programar_pickup extends javax.swing.JDialog {
         jLabel_peso = new javax.swing.JLabel();
         jLabel_dimensiones = new javax.swing.JLabel();
         jTextField_descripcion = new javax.swing.JTextField();
-        jTextField_dim2 = new javax.swing.JTextField();
-        jTextField__dim1 = new javax.swing.JTextField();
-        jTextField_dim3 = new javax.swing.JTextField();
+        jTextField_ancho = new javax.swing.JTextField();
+        jTextField__alto = new javax.swing.JTextField();
+        jTextField_largo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton_seguro = new javax.swing.JRadioButton();
         jLabel_valor_declarado = new javax.swing.JLabel();
-        jTextField_valor_declarado = new javax.swing.JTextField();
-        jSpinner_pesokg = new javax.swing.JSpinner();
-        jSpinner_cantidad = new javax.swing.JSpinner();
+        jTextField_tiempo_de_entrega = new javax.swing.JTextField();
         jLabel_cantidad = new javax.swing.JLabel();
         jLabel_valor_declarado1 = new javax.swing.JLabel();
-        jTextField_valor_declarado1 = new javax.swing.JTextField();
+        jTextField_valor_declarado = new javax.swing.JTextField();
+        jTextField_medio_de_pago = new javax.swing.JTextField();
+        jLabel_valor_declarado2 = new javax.swing.JLabel();
+        jTextField_pesokg = new javax.swing.JTextField();
+        jTextField_cantidad = new javax.swing.JTextField();
+        jCheckBox_seguro = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         jButton_atras = new javax.swing.JButton();
         jButton_generar_factura = new javax.swing.JButton();
@@ -251,30 +282,32 @@ public class programar_pickup extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabelnombre_remi1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelnombre_remi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_apellido2_remitente, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                    .addComponent(jTextField_nombre_remitente)
-                    .addComponent(jTextField_correo_remitente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelnombre_remi2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_celular_remitente, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                    .addComponent(jTextField_apellido1_remitente)
-                    .addComponent(jTextField_direccion_remitente))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabelnombre_remi1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelnombre_remi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_apellido2_remitente, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                            .addComponent(jTextField_nombre_remitente)
+                            .addComponent(jTextField_correo_remitente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelnombre_remi2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField_celular_remitente, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                            .addComponent(jTextField_apellido1_remitente)
+                            .addComponent(jTextField_direccion_remitente)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,30 +403,32 @@ public class programar_pickup extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabelnombre_remi4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelnombre_remi3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_apellido2_destinatario, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                    .addComponent(jTextField_nombre_destinatario)
-                    .addComponent(jTextField_correo_destinatario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelnombre_remi5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_direccion1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_celular_destinatario, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                    .addComponent(jTextField_apellido1_destinatario)
-                    .addComponent(jTextField_direccion_destinatario))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabelnombre_remi4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelnombre_remi3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_apellido2_destinatario, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                            .addComponent(jTextField_nombre_destinatario)
+                            .addComponent(jTextField_correo_destinatario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelnombre_remi5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel_direccion1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField_celular_destinatario, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                            .addComponent(jTextField_apellido1_destinatario)
+                            .addComponent(jTextField_direccion_destinatario)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,21 +466,21 @@ public class programar_pickup extends javax.swing.JDialog {
         jLabel_dimensiones.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_dimensiones.setText("Dimensiones:");
 
-        jTextField_dim2.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_ancho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_dim2ActionPerformed(evt);
+                jTextField_anchoActionPerformed(evt);
             }
         });
 
-        jTextField__dim1.addActionListener(new java.awt.event.ActionListener() {
+        jTextField__alto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField__dim1ActionPerformed(evt);
+                jTextField__altoActionPerformed(evt);
             }
         });
 
-        jTextField_dim3.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_largo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_dim3ActionPerformed(evt);
+                jTextField_largoActionPerformed(evt);
             }
         });
 
@@ -453,19 +488,12 @@ public class programar_pickup extends javax.swing.JDialog {
 
         jLabel2.setText("x");
 
-        jRadioButton_seguro.setText("Incluir Seguro");
-        jRadioButton_seguro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton_seguroActionPerformed(evt);
-            }
-        });
-
         jLabel_valor_declarado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_valor_declarado.setText("Tiempo de entrega aprox:");
 
-        jTextField_valor_declarado.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_tiempo_de_entrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_valor_declaradoActionPerformed(evt);
+                jTextField_tiempo_de_entregaActionPerformed(evt);
             }
         });
 
@@ -475,52 +503,76 @@ public class programar_pickup extends javax.swing.JDialog {
         jLabel_valor_declarado1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel_valor_declarado1.setText("Valor Declarado:");
 
+        jLabel_valor_declarado2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel_valor_declarado2.setText("Medio de pago:");
+
+        jTextField_pesokg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_pesokgActionPerformed(evt);
+            }
+        });
+
+        jCheckBox_seguro.setText("Incluir seguro");
+        jCheckBox_seguro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_seguroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel_descripcion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_descripcion))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel_dimensiones, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                                    .addComponent(jLabel_peso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(5, 5, 5)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jSpinner_pesokg, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jSpinner_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jTextField__dim1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_dim2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_dim3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButton_seguro))))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel_valor_declarado)
+                                .addComponent(jLabel_descripcion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_valor_declarado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jLabel_valor_declarado1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField_valor_declarado1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextField_descripcion))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 122, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel_dimensiones, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                            .addComponent(jLabel_peso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(5, 5, 5)
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addComponent(jTextField_pesokg, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addComponent(jTextField__alto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField_ancho, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField_largo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jTextField_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jCheckBox_seguro)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jLabel_valor_declarado)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField_tiempo_de_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jLabel_valor_declarado1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jTextField_valor_declarado, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_valor_declarado2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_medio_de_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -534,26 +586,31 @@ public class programar_pickup extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_peso)
-                    .addComponent(jSpinner_pesokg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_cantidad)
-                    .addComponent(jSpinner_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_pesokg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_dimensiones)
-                    .addComponent(jTextField_dim2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField__dim1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_dim3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_ancho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField__alto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_largo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jRadioButton_seguro))
+                    .addComponent(jCheckBox_seguro))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField_valor_declarado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_valor_declarado1))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_valor_declarado)
+                        .addComponent(jTextField_tiempo_de_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_valor_declarado)
-                    .addComponent(jTextField_valor_declarado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField_valor_declarado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel_valor_declarado1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextField_medio_de_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_valor_declarado2))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jButton_atras.setText("Atras");
@@ -585,7 +642,7 @@ public class programar_pickup extends javax.swing.JDialog {
                         .addGap(114, 114, 114)
                         .addComponent(jButton_generar_factura)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE))
+                    .addComponent(jLabel_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -650,25 +707,21 @@ public class programar_pickup extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton_atrasActionPerformed
 
-    private void jTextField_valor_declaradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_valor_declaradoActionPerformed
+    private void jTextField_tiempo_de_entregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_tiempo_de_entregaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_valor_declaradoActionPerformed
+    }//GEN-LAST:event_jTextField_tiempo_de_entregaActionPerformed
 
-    private void jRadioButton_seguroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_seguroActionPerformed
+    private void jTextField_largoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_largoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton_seguroActionPerformed
+    }//GEN-LAST:event_jTextField_largoActionPerformed
 
-    private void jTextField_dim3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_dim3ActionPerformed
+    private void jTextField__altoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField__altoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_dim3ActionPerformed
+    }//GEN-LAST:event_jTextField__altoActionPerformed
 
-    private void jTextField__dim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField__dim1ActionPerformed
+    private void jTextField_anchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_anchoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField__dim1ActionPerformed
-
-    private void jTextField_dim2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_dim2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_dim2ActionPerformed
+    }//GEN-LAST:event_jTextField_anchoActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -693,6 +746,14 @@ public class programar_pickup extends javax.swing.JDialog {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.autofill_destinatario();// TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField_pesokgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_pesokgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_pesokgActionPerformed
+
+    private void jCheckBox_seguroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_seguroActionPerformed
+        this.asegurado=true;// TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox_seguroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -742,6 +803,7 @@ public class programar_pickup extends javax.swing.JDialog {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton_atras;
     private javax.swing.JButton jButton_generar_factura;
+    private javax.swing.JCheckBox jCheckBox_seguro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -760,6 +822,7 @@ public class programar_pickup extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel_peso;
     private javax.swing.JLabel jLabel_valor_declarado;
     private javax.swing.JLabel jLabel_valor_declarado1;
+    private javax.swing.JLabel jLabel_valor_declarado2;
     private javax.swing.JLabel jLabelnombre_remi;
     private javax.swing.JLabel jLabelnombre_remi1;
     private javax.swing.JLabel jLabelnombre_remi2;
@@ -772,14 +835,13 @@ public class programar_pickup extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton_seguro;
-    private javax.swing.JSpinner jSpinner_cantidad;
-    private javax.swing.JSpinner jSpinner_pesokg;
-    private javax.swing.JTextField jTextField__dim1;
+    private javax.swing.JTextField jTextField__alto;
+    private javax.swing.JTextField jTextField_ancho;
     private javax.swing.JTextField jTextField_apellido1_destinatario;
     private javax.swing.JTextField jTextField_apellido1_remitente;
     private javax.swing.JTextField jTextField_apellido2_destinatario;
     private javax.swing.JTextField jTextField_apellido2_remitente;
+    private javax.swing.JTextField jTextField_cantidad;
     private javax.swing.JTextField jTextField_cedula_destinatario;
     private javax.swing.JTextField jTextField_cedula_remitente;
     private javax.swing.JTextField jTextField_celular_destinatario;
@@ -787,14 +849,15 @@ public class programar_pickup extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField_correo_destinatario;
     private javax.swing.JTextField jTextField_correo_remitente;
     private javax.swing.JTextField jTextField_descripcion;
-    private javax.swing.JTextField jTextField_dim2;
-    private javax.swing.JTextField jTextField_dim3;
     private javax.swing.JTextField jTextField_direccion_destinatario;
     private javax.swing.JTextField jTextField_direccion_remitente;
+    private javax.swing.JTextField jTextField_largo;
+    private javax.swing.JTextField jTextField_medio_de_pago;
     private javax.swing.JTextField jTextField_nombre_destinatario;
     private javax.swing.JTextField jTextField_nombre_remitente;
+    private javax.swing.JTextField jTextField_pesokg;
+    private javax.swing.JTextField jTextField_tiempo_de_entrega;
     private javax.swing.JTextField jTextField_valor_declarado;
-    private javax.swing.JTextField jTextField_valor_declarado1;
     // End of variables declaration//GEN-END:variables
 
 }
