@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -83,7 +85,7 @@ public class metodosBD {
         return resultadito;
     }
     
-    public String buscar_persona(String cedula){
+    /*public String buscar_persona(String cedula){
         ResultSet resultado = null;
         String resultadito="";
         Connection conexion;
@@ -104,7 +106,7 @@ public class metodosBD {
             System.out.println(ex);
         }
         return resultadito;
-    }
+    }*/
     
     
     public int buscar_personal(String contrasena, int user) {
@@ -157,8 +159,129 @@ public class metodosBD {
             return resultadito;
         }
     
+    public ArrayList<String[]> consultarSede(int id)
+    {
+        Connection conexion;
+        ArrayList<String[]> tabla = new ArrayList<>();
+        String sentencia_guardar= ("SELECT * FROM sedes WHERE id=?");
+        try {
+           conexion = (Connection) ConexionBD.Conectar();
+            PreparedStatement sql = conexion.prepareStatement(sentencia_guardar);
+        	sql.setInt(1, id);
+            
+                ResultSet rs = sql.executeQuery();
+ 
+            while (rs.next()){
+                String[] fila = new String[4];
+                for (int i = 0; i < 4; i++) {
+                    fila[i] = rs.getString(i+1);
+                }
+                tabla.add(fila);
+            }
+            
+           
+        } catch (SQLException ex) {
+            
+            System.out.println("Error: " + ex.getMessage());
+            
+        }
+        return tabla;
+    }
+    
+    public ArrayList<String[]> consultarEmpleado(int id)
+    {
+        Connection conexion;
+        ArrayList<String[]> tabla = new ArrayList<>();
+        String sentencia_guardar= ("SELECT * FROM usr_empleados_activos WHERE id= ?");
+        try {
+           conexion = (Connection) ConexionBD.Conectar();
+            PreparedStatement sql = conexion.prepareStatement(sentencia_guardar);
+        	sql.setInt(1, id);
+            
+                ResultSet rs = sql.executeQuery();
+ 
+            while (rs.next()){
+                String[] fila = new String[7];
+                for (int i = 0; i < 7; i++) {
+                    fila[i] = rs.getString(i+1);
+                }
+                tabla.add(fila);
+            }
+            
+           
+        } catch (SQLException ex) {
+            
+            System.out.println("Error: " + ex.getMessage());
+            
+        }
+        return tabla;
+    }
+    
+        public ArrayList<String[]> consultarCliente(int id)
+    {
+        Connection conexion;
+        ArrayList<String[]> tabla = new ArrayList<>();
+        String sentencia_guardar= ("SELECT * FROM clientes_act WHERE id_cliente= ?");
+        try {
+           conexion = (Connection) ConexionBD.Conectar();
+            PreparedStatement sql = conexion.prepareStatement(sentencia_guardar);
+        	sql.setInt(1, id);
+            
+                ResultSet rs = sql.executeQuery();
+ 
+            while (rs.next()){
+                String[] fila = new String[7];
+                for (int i = 0; i < 7; i++) {
+                    fila[i] = rs.getString(i+1);
+                }
+                tabla.add(fila);
+            }
+            
+           
+        } catch (SQLException ex) {
+            
+            System.out.println("Error: " + ex.getMessage());
+            
+        }
+        return tabla;
+    }
+        
+     public ArrayList<String[]> consultarPaquetes()
+    {
+        Connection conexion;
+        ArrayList<String[]> tabla = new ArrayList<>();
+        String sentencia_guardar= "SELECT * FROM estadoPaquete";
+        try {
+           conexion = (Connection) ConexionBD.Conectar();
+            PreparedStatement sql = conexion.prepareStatement(sentencia_guardar);
+        	//sql.setString(1, "");
+                
+            
+                ResultSet rs = sql.executeQuery();
+                //sql.getResultSet();
+ 
+            while (rs.next()){
+                String[] fila = new String[7];
+                for (int i = 0; i < 7; i++) {
+                    fila[i] = rs.getString(i+1);
+                }
+                tabla.add(fila);
+            }
+            
+           
+        } catch (SQLException ex) {
+            
+            System.out.println("Error: " + ex.getMessage());
+            
+        }
+        return tabla;
+    }
+     
+    
+
+}
                 
     
 
     
-}
+

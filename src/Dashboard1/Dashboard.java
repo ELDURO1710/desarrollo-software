@@ -5,18 +5,54 @@
  */
 package Dashboard1;
 
+import Dashboard1.Entidades.Empleado;
+import Dashboard1.Entidades.Paquete;
+import Metodos_postgresql.metodosBD;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.*;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author DANILO
  */
 public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
-
+    private List<Paquete> paquetes;
+    metodosBD metodos = new metodosBD();
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
         this.setLocationRelativeTo(null);
+       // mostrarPaquetes();
+    }
+    
+            public void mostrarPaquetes(){
+        
+        DefaultTableModel modeloDatos = (DefaultTableModel)TablaPaquetes.getModel();
+        
+        while (modeloDatos.getRowCount() > 0) {
+            modeloDatos.removeRow(modeloDatos.getRowCount()-1);
+        }
+        List<String[]> lista = metodos.consultarPaquetes();
+        this.paquetes = new ArrayList<>();
+        
+        for (int i = 0; i < lista.size(); i++) {
+            String[] row =  lista.get(i);
+            Object[] fila = new Object[]{row[0], row[1], row[2], row[3], row[4], row[5], row[6]};
+            paquetes.add(new Paquete(Integer.parseInt(row[0]), // id
+                                      Integer.parseInt(row[1]), // nombre
+                                      row[2], // celular 
+                                      row[3], //apellido1
+                                      row[4], //apellido2
+                                      row[5], Boolean.getBoolean(row[6])
+                                        //direccion
+                                      )); // correo
+            modeloDatos.addRow(fila);
+    
+        }
     }
 
     /**
@@ -62,11 +98,12 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
         jPanel11 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        txt_Entregados = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel29 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table_Estados = new javax.swing.JTable();
+        TablaPaquetes = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -362,9 +399,9 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Delivered Orders");
 
-        jLabel26.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("2000");
+        txt_Entregados.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        txt_Entregados.setForeground(new java.awt.Color(255, 255, 255));
+        txt_Entregados.setText("2000");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -380,7 +417,7 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
                         .addContainerGap())
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_Entregados, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel11Layout.setVerticalGroup(
@@ -389,7 +426,7 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
+                        .addComponent(txt_Entregados)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel25)
                         .addGap(20, 20, 20))
@@ -401,15 +438,22 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
         jLabel29.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel29.setText("ESTADO DE ENVIO");
 
-        Table_Estados.setModel(new javax.swing.table.DefaultTableModel(
+        TablaPaquetes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID PAQUETE", "FECHA", "ESTADO", "SEDE", "VALOR"
+                "Id Paquete", "Valor declarado", "Fecha recibido", "Fecha entregado", "Desde", "Hacia", "Asegurado"
             }
         ));
-        jScrollPane1.setViewportView(Table_Estados);
+        jScrollPane1.setViewportView(TablaPaquetes);
+
+        btnBuscar.setText("Mostrar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -419,22 +463,26 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel29)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(66, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(24, 24, 24))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -458,12 +506,14 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
                         .addGap(9, 9, 9)))
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 710, 450));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 770, 460));
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -489,12 +539,12 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dashboard1/Img/icons8_power_off_button_32px.png"))); // NOI18N
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, -1, 40));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, -1, 40));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("SALIR");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -513,6 +563,11 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
     private void comboTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTablesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboTablesActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        mostrarPaquetes();
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -550,7 +605,8 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table_Estados;
+    private javax.swing.JTable TablaPaquetes;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox<String> comboTables;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -570,7 +626,6 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -593,5 +648,6 @@ public class Dashboard extends javax.swing.JFrame { //ESTO ES LO DE GITHUB
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel txt_Entregados;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,119 +5,85 @@
  */
 package Dashboard1.Entidades;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
 /**
  *
  * @author DANILO
  */
-@Entity
-@Table(name = "empleado")
-@NamedQueries({
-    @NamedQuery(name = "Empleado.findAll", query = "SELECT e FROM Empleado e"),
-    @NamedQuery(name = "Empleado.findById", query = "SELECT e FROM Empleado e WHERE e.id = :id"),
-    @NamedQuery(name = "Empleado.findByContrasena", query = "SELECT e FROM Empleado e WHERE e.contrasena = :contrasena")})
-public class Empleado implements Serializable {
+public class Empleado {
+    
+    private int id;
+    private String nombre;
+    private String celular;
+    private String apellido1;
+    private String apellido2;
+    private String direccion;
+    private String correo;
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Column(name = "contrasena")
-    private String contrasena;
-    @JoinColumn(name = "id_cargo", referencedColumnName = "id")
-    @ManyToOne
-    private Cargo idCargo;
-    @JoinColumn(name = "id_persona", referencedColumnName = "id")
-    @ManyToOne
-    private Persona idPersona;
-    @JoinColumn(name = "id_sede", referencedColumnName = "id")
-    @ManyToOne
-    private Sede idSede;
-
-    public Empleado() {
-    }
-
-    public Empleado(Integer id) {
+    public Empleado(int id, String nombre, String celular, String apellido1, String apellido2, String direccion, String correo) {
         this.id = id;
+        this.nombre = nombre;
+        this.celular = celular;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.direccion = direccion;
+        this.correo = correo;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Cargo getIdCargo() {
-        return idCargo;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setIdCargo(Cargo idCargo) {
-        this.idCargo = idCargo;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
-    public Persona getIdPersona() {
-        return idPersona;
+    public String getApellido1() {
+        return apellido1;
     }
 
-    public void setIdPersona(Persona idPersona) {
-        this.idPersona = idPersona;
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
     }
 
-    public Sede getIdSede() {
-        return idSede;
+    public String getApellido2() {
+        return apellido2;
     }
 
-    public void setIdSede(Sede idSede) {
-        this.idSede = idSede;
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getDireccion() {
+        return direccion;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Empleado)) {
-            return false;
-        }
-        Empleado other = (Empleado) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    @Override
-    public String toString() {
-        return "Dashboard1.Entidades.Empleado[ id=" + id + " ]";
+    public String getCorreo() {
+        return correo;
     }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+    
     
 }
